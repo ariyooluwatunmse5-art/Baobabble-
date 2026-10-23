@@ -1,0 +1,1550 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <!-- Primary -->
+  <title>Baobabble - Learn Yoruba, Igbo, Hausa & 4 African Languages with AI</title>
+  <meta name="description" content="The Duolingo for Africa. Learn Yoruba, Igbo, Hausa, Amharic, Swahili, Zulu, Lingala with gamified lessons, AI tutor & native audio.">
+
+  <!-- Open Graph / Facebook / WhatsApp / LinkedIn -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://www.baobabble.com/">
+  <meta property="og:title" content="Baobabble - The Duolingo for African Languages">
+  <meta property="og:description" content="Master 7 African languages with AI tutor, games & native pronunciation. Start with Yoruba today!">
+  <meta property="og:image" content="https://www.baobabble.com/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+
+  <!-- Twitter / X -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:url" content="https://www.baobabble.com/">
+  <meta name="twitter:title" content="Baobabble - Learn 7 African Languages">
+  <meta name="twitter:description" content="Gamified AI-powered learning for Yoruba, Igbo, Hausa & more.">
+  <meta name="twitter:image" content="https://www.baobabble.com/og-image.png">
+
+  <!-- PWA / Mobile -->
+  <meta name="theme-color" content="#16a34a">
+  <link rel="manifest" href="/manifest.json">
+  <link rel="canonical" href="https://www.baobabble.com/">
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="Baobabble" />
+
+  <!-- Schema.org JSON-LD Structured Data for SoftwareApplication and Course -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "SoftwareApplication",
+        "name": "Baobabble",
+        "operatingSystem": "Web, Android, iOS",
+        "applicationCategory": "EducationalApplication",
+        "description": "Gamified African language learning app featuring AI tutors, tone-guided pronunciation, and CEFR A1-C2 curricula for Yoruba, Igbo, Hausa, Swahili, Amharic, Zulu, and Lingala.",
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "USD"
+        },
+        "aggregateRating": {
+          "@type": "AggregateRating",
+          "ratingValue": "4.9",
+          "ratingCount": "12840"
+        }
+      },
+      {
+        "@type": "Course",
+        "name": "Yoruba Language Mastery (CEFR A1 to C2)",
+        "description": "Comprehensive interactive Yoruba course covering phonetics, tonal markings (Àmì Ohùn), solfège pronunciation, cultural honorifics, and everyday dialogue.",
+        "provider": {
+          "@type": "Organization",
+          "name": "Baobabble",
+          "sameAs": "https://baobabble.polsia.io"
+        },
+        "educationalCredentialAwarded": "Baobabble Yoruba CEFR Proficiency Certificate",
+        "hasCourseInstance": {
+          "@type": "CourseInstance",
+          "courseMode": "Online",
+          "inLanguage": ["yo", "en"]
+        }
+      }
+    ]
+  }
+  </script>
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50: '#ecfdf5',
+              100: '#d1fae5',
+              200: '#a7f3d0',
+              500: '#22c55e',
+              600: '#16a34a',
+              700: '#15803d',
+              800: '#166534',
+              900: '#14532d',
+            },
+            darkBg: '#090d16',
+            cardBg: '#131b2e',
+            cardBorder: '#1e293b'
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- React 18 & ReactDOM -->
+  <script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Outfit:wght@600;700;800;900&display=swap');
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background-color: #090d16;
+      color: #f8fafc;
+      overflow-x: hidden;
+      -webkit-tap-highlight-color: transparent;
+    }
+    h1, h2, h3, .font-heading {
+      font-family: 'Outfit', sans-serif;
+    }
+    .custom-scrollbar::-webkit-scrollbar {
+      width: 4px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+      background: #334155;
+      border-radius: 4px;
+    }
+    @keyframes pulseGlow {
+      0%, 100% { box-shadow: 0 0 20px rgba(34, 197, 94, 0.4); }
+      50% { box-shadow: 0 0 35px rgba(34, 197, 94, 0.8); }
+    }
+    .pulse-glow {
+      animation: pulseGlow 2.5s infinite;
+    }
+  </style>
+</head>
+<body class="bg-darkBg text-slate-100 min-h-screen">
+  <div id="root"></div>
+
+  <script type="text/babel">
+    const { useState, useEffect, useRef } = React;
+
+    // --- Sound Synthesis Helpers (Web Audio API) ---
+    const playSuccessSound = () => {
+      try {
+        const ctx = new (window.AudioContext || window.webkitAudioContext)();
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        osc.type = 'triangle';
+        osc.frequency.setValueAtTime(523.25, ctx.currentTime); // C5
+        osc.frequency.exponentialRampToValueAtTime(659.25, ctx.currentTime + 0.1); // E5
+        osc.frequency.exponentialRampToValueAtTime(783.99, ctx.currentTime + 0.2); // G5
+        gain.gain.setValueAtTime(0.3, ctx.currentTime);
+        gain.gain.linearRampToValueAtTime(0, ctx.currentTime + 0.4);
+        osc.start();
+        osc.stop(ctx.currentTime + 0.4);
+      } catch (e) {
+        console.warn('Audio not available:', e);
+      }
+    };
+
+    const playErrorSound = () => {
+      try {
+        const ctx = new (window.AudioContext || window.webkitAudioContext)();
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        osc.type = 'sawtooth';
+        osc.frequency.setValueAtTime(220, ctx.currentTime);
+        osc.frequency.setValueAtTime(180, ctx.currentTime + 0.15);
+        gain.gain.setValueAtTime(0.2, ctx.currentTime);
+        gain.gain.linearRampToValueAtTime(0, ctx.currentTime + 0.35);
+        osc.start();
+        osc.stop(ctx.currentTime + 0.35);
+      } catch (e) {
+        console.warn('Audio error:', e);
+      }
+    };
+
+    // --- Speech Synthesis (Web Speech API) ---
+    const speakText = (text, langCode = 'yo-NG') => {
+      if (!('speechSynthesis' in window)) {
+        alert(`Pronunciation: "${text}"`);
+        return;
+      }
+      window.speechSynthesis.cancel();
+      const utterance = new SpeechSynthesisUtterance(text);
+      utterance.lang = langCode;
+      utterance.rate = 0.88;
+      
+      const voices = window.speechSynthesis.getVoices();
+      const match = voices.find(v => v.lang.startsWith(langCode.split('-')[0]));
+      if (match) utterance.voice = match;
+
+      window.speechSynthesis.speak(utterance);
+    };
+
+    // --- 7 African Languages Data ---
+    const LANGUAGES = {
+      yoruba: {
+        id: 'yoruba',
+        name: 'Yoruba',
+        nativeName: 'Èdè Yorùbá',
+        greeting: 'Ẹ ń lẹ́ o!',
+        greetingEn: 'Hello / Greetings!',
+        tagline: 'Tonal beauty of West Africa with solfège pitch mastery',
+        speakers: '45+ Million',
+        ttsCode: 'yo-NG',
+        accentColor: '#22c55e',
+        toneGuide: 'High (Mí /), Mid (Re -), Low (Dò \\)',
+        lessons: [
+          {
+            id: 'yo-alphabet',
+            title: 'Yoruba Alphabet',
+            subtitle: 'Special characters: Gb, P, Ẹ, Ọ, Ṣ',
+            completed: true,
+            stars: 3,
+            questions: [
+              {
+                prompt: 'Which vowel has an open "eh" sound like in "bed"?',
+                options: ['Ẹ (ẹ)', 'E (e)', 'Ọ (ọ)', 'A (a)'],
+                correctIndex: 0,
+                explanation: 'Ẹ with the sub-dot represents the open front vowel /ɛ/, as in "Ẹ̀bà" or "Ẹ̀rù".'
+              },
+              {
+                prompt: 'How is the digraph "Gb" pronounced in Yoruba?',
+                options: ['Voiced labial-velar stop simultaneously', 'Separate G followed by B', 'Silent G', 'Like English V'],
+                correctIndex: 0,
+                explanation: 'Gb is a co-articulated stop pronounced by closing both lips and the back of the palate at once.'
+              }
+            ]
+          },
+          {
+            id: 'yo-tones',
+            title: 'Tones & Grammar',
+            subtitle: 'Tonal Minimal Pairs (Dò-Re-Mí)',
+            isCurrent: true,
+            hasPlayButton: true,
+            stars: 1,
+            questions: [
+              {
+                prompt: 'What does "Ọkọ̀" (Low-Low tone \\\\) mean?',
+                options: ['Vehicle / Car / Boat', 'Husband', 'Hoe / Farm tool', 'Spear'],
+                correctIndex: 0,
+                explanation: 'Ọkọ̀ (Low-Low) = Vehicle/Car. Ọkọ (Mid-Mid) = Husband. Ọkọ́ (Mid-High) = Hoe!'
+              },
+              {
+                prompt: 'What tone mark is used for the High Pitch (Mí)?',
+                options: ['Acute accent ( / )', 'Grave accent ( \\ )', 'Macron ( - )', 'Circumflex ( ^ )'],
+                correctIndex: 0,
+                explanation: 'High tone (Mí) uses the acute accent: á, é, ẹ́, í, ó, ọ́, ú.'
+              },
+              {
+                prompt: 'Select the correct honorific greeting to an elder:',
+                options: ['Ẹ kálẹ́ o', 'Kálẹ́', 'Báwo ni', 'Dáadáa'],
+                correctIndex: 0,
+                explanation: 'The prefix "Ẹ" signifies the respectful plural/honorific for elders and groups.'
+              }
+            ]
+          },
+          {
+            id: 'yo-spaced-review',
+            title: 'Smart Spaced Review',
+            subtitle: '5 high-frequency words due today',
+            questions: [
+              {
+                prompt: 'Translate: "Báwo ni?"',
+                options: ['How are things / How are you?', 'Good morning', 'Thank you', 'Goodbye'],
+                correctIndex: 0,
+                explanation: 'Báwo ni is the most common informal greeting in contemporary Yoruba.'
+              },
+              {
+                prompt: 'What does "Oṣé" or "Ẹ ṣeé" mean?',
+                options: ['Thank you', 'Please', 'Excuse me', 'Welcome'],
+                correctIndex: 0,
+                explanation: 'Ẹ ṣeé means "Thank you" with respect!'
+              }
+            ]
+          },
+          {
+            id: 'yo-royal-greetings',
+            title: 'Royal Greetings & Respect',
+            subtitle: 'Àkíyèsí Àṣà • Traditional honorifics',
+            questions: [
+              {
+                prompt: 'How do you salute a crowned Yoruba King (Ọba)?',
+                options: ['Kábíyèsí, Káádé pẹ́ lórí!', 'Ẹ ń lẹ́ o', 'Báwo ni Kábíyèsí', 'Ẹ káàbọ̀'],
+                correctIndex: 0,
+                explanation: '"Kábíyèsí, Káádé pẹ́ lórí, kí bàtà pẹ́ lẹ́sẹ̀!" honors the crown and long reign.'
+              }
+            ]
+          }
+        ]
+      },
+      igbo: {
+        id: 'igbo',
+        name: 'Igbo',
+        nativeName: 'Asụsụ Igbo',
+        greeting: 'Nnọọ / Kèdú!',
+        greetingEn: 'Welcome / How are you?',
+        tagline: 'Tonal expression with dotted vowels (ị, ọ, ụ) and nasalization',
+        speakers: '30+ Million',
+        ttsCode: 'ig-NG',
+        accentColor: '#38bdf8',
+        toneGuide: 'High tone, Low tone, Downstep',
+        lessons: [
+          {
+            id: 'ig-alphabet',
+            title: 'Igbo Alphabet (Mkpụrụ Edemede)',
+            subtitle: 'Dotted vowels: Ị, Ọ, Ụ and blended consonants',
+            completed: true,
+            stars: 3,
+            questions: [
+              {
+                prompt: 'How many vowels does standard Igbo (Àbịdịị) have?',
+                options: ['8 vowels (4 light, 4 heavy)', '5 vowels', '10 vowels', '7 vowels'],
+                correctIndex: 0,
+                explanation: 'Igbo features vowel harmony with 4 light vowels (a, ị, ọ, ụ) and 4 heavy vowels (e, i, o, u).'
+              }
+            ]
+          },
+          {
+            id: 'ig-tones',
+            title: 'Tones & Greetings',
+            subtitle: 'Kèdú kà ị́ mèrè? (How are you doing?)',
+            isCurrent: true,
+            hasPlayButton: true,
+            stars: 2,
+            questions: [
+              {
+                prompt: 'What is the correct response to "Kèdú?"',
+                options: ['Ọ́ dị̀ m̀mà (I am fine)', 'Dàálụ́', 'Imeela', 'Ka o meso'],
+                correctIndex: 0,
+                explanation: '"Ọ́ dị̀ m̀mà" indicates everything is well and peaceful.'
+              }
+            ]
+          },
+          {
+            id: 'ig-proverbs',
+            title: 'Igbo Idioms & Respect',
+            subtitle: 'Ilu Igbo: The palm oil with which words are eaten',
+            questions: [
+              {
+                prompt: 'What does "Dàálụ́" mean?',
+                options: ['Thank you / Well done', 'Good night', 'Goodbye', 'Welcome'],
+                correctIndex: 0,
+                explanation: 'Dàálụ́ is universal appreciation and gratitude in Igbo.'
+              }
+            ]
+          }
+        ]
+      },
+      hausa: {
+        id: 'hausa',
+        name: 'Hausa',
+        nativeName: 'Harshen Hausa',
+        greeting: 'Sannu da zuwa!',
+        greetingEn: 'Welcome & Greetings!',
+        tagline: 'Chadic lingua franca of the Sahel with implosives (ɓ, ɗ, ƙ)',
+        speakers: '80+ Million',
+        ttsCode: 'ha-NG',
+        accentColor: '#f59e0b',
+        toneGuide: 'High tone (unmarked), Low tone (grave \\), Falling tone (^)',
+        lessons: [
+          {
+            id: 'ha-alphabet',
+            title: 'Hausa Hooked Consonants',
+            subtitle: 'Glottalized sounds: Ɓ, Ɗ, Ƙ, and ʼY',
+            completed: true,
+            stars: 3,
+            questions: [
+              {
+                prompt: 'What type of sound is Hausa "Ɓ" (hooked B)?',
+                options: ['Implosive consonant', 'Nasal consonant', 'Click sound', 'Aspirated plosive'],
+                correctIndex: 0,
+                explanation: 'Ɓ is an voiced bilabial implosive produced by drawing air inward.'
+              }
+            ]
+          },
+          {
+            id: 'ha-greetings',
+            title: 'Greetings & Etiquette',
+            subtitle: 'Ina kwana? (Good morning)',
+            isCurrent: true,
+            hasPlayButton: true,
+            stars: 1,
+            questions: [
+              {
+                prompt: 'How do you ask "How are you?" to a male in Hausa?',
+                options: ['Yaya kake?', 'Yaya kike?', 'Lafiya lau', 'Sannu da aiki'],
+                correctIndex: 0,
+                explanation: 'Yaya kake? (masculine). For a female, you ask: Yaya kike?'
+              }
+            ]
+          }
+        ]
+      },
+      amharic: {
+        id: 'amharic',
+        name: 'Amharic',
+        nativeName: 'አማርኛ (Amarəñña)',
+        greeting: 'እንደምን አለህ (Endemen alleh)!',
+        greetingEn: 'How are you / Greetings!',
+        tagline: 'Ancient Semitic script of Ethiopia with the Fidel syllabary',
+        speakers: '35+ Million',
+        ttsCode: 'am-ET',
+        accentColor: '#ec4899',
+        toneGuide: 'Stress-accent and ejective consonant system',
+        lessons: [
+          {
+            id: 'am-fidel',
+            title: 'The Fidel Syllabary',
+            subtitle: 'Understanding the 7 vowel orders per consonant',
+            completed: true,
+            stars: 3,
+            questions: [
+              {
+                prompt: 'How does the Amharic Fidel script organize syllables?',
+                options: ['Each base consonant modifies shape for 7 vowel orders', 'It is an alphabet with separate vowel letters', 'It is pure pictograms', 'It is right-to-left like Arabic'],
+                correctIndex: 0,
+                explanation: 'Amharic is an abugida where base consonant glyphs take modifications for 7 vowel series (ግዕዝ, ካዕብ, etc.).'
+              }
+            ]
+          },
+          {
+            id: 'am-greetings',
+            title: 'Coffee Ceremony & Greetings',
+            subtitle: 'Selam & Bunna etiquette',
+            isCurrent: true,
+            hasPlayButton: true,
+            stars: 1,
+            questions: [
+              {
+                prompt: 'What does "ሰላም" (Selam) mean?',
+                options: ['Peace / Hello', 'Thank you', 'Water', 'Good morning'],
+                correctIndex: 0,
+                explanation: 'Selam means Peace, used everywhere as a warm, timeless greeting.'
+              }
+            ]
+          }
+        ]
+      },
+      swahili: {
+        id: 'swahili',
+        name: 'Swahili',
+        nativeName: 'Kiswahili',
+        greeting: 'Hujambo / Habari gani!',
+        greetingEn: 'Hello / What is the news!',
+        tagline: 'East African lingua franca uniting over 150 million speakers',
+        speakers: '150+ Million',
+        ttsCode: 'sw-KE',
+        accentColor: '#06b6d4',
+        toneGuide: 'Penultimate syllable stress (stress on second to last vowel)',
+        lessons: [
+          {
+            id: 'sw-intro',
+            title: 'Habari & Basic Greetings',
+            subtitle: 'Polite questions and conversational flow',
+            completed: true,
+            stars: 3,
+            questions: [
+              {
+                prompt: 'What is the standard answer to "Hujambo?"',
+                options: ['Sijambo (I am well)', 'Nzuri', 'Kwaheri', 'Asante'],
+                correctIndex: 0,
+                explanation: '"Hujambo?" (No troubles with you?) is answered with "Sijambo" (I have no troubles).'
+              }
+            ]
+          },
+          {
+            id: 'sw-noun-classes',
+            title: 'Noun Classes (Ngeli)',
+            subtitle: 'M-Wa class for human beings',
+            isCurrent: true,
+            hasPlayButton: true,
+            stars: 2,
+            questions: [
+              {
+                prompt: 'What is the plural of "Mtu" (person)?',
+                options: ['Watu (people)', 'Vitu', 'Mitu', 'Kitu'],
+                correctIndex: 0,
+                explanation: 'M- prefix becomes Wa- in plural for people: Mtu -> Watu.'
+              }
+            ]
+          }
+        ]
+      },
+      zulu: {
+        id: 'zulu',
+        name: 'isiZulu',
+        nativeName: 'isiZulu',
+        greeting: 'Sawubona!',
+        greetingEn: 'I see you / Greetings!',
+        tagline: 'Nguni rhythm with iconic click consonants (c, q, x) and rich proverbs',
+        speakers: '28+ Million',
+        ttsCode: 'zu-ZA',
+        accentColor: '#8b5cf6',
+        toneGuide: 'Click consonants: Dental (c), Palato-alveolar (q), Lateral (x)',
+        lessons: [
+          {
+            id: 'zu-clicks',
+            title: 'isiZulu Click Consonants',
+            subtitle: 'Mastering C (tsk), Q (cork pop), and X (side click)',
+            completed: true,
+            stars: 3,
+            questions: [
+              {
+                prompt: 'Which click consonant is made on the front teeth (like "tsk-tsk")?',
+                options: ['C (Dental click)', 'Q (Alveolar click)', 'X (Lateral click)', 'K'],
+                correctIndex: 0,
+                explanation: 'The letter C represents the dental click made with the tongue against upper teeth.'
+              }
+            ]
+          },
+          {
+            id: 'zu-sawubona',
+            title: 'Sawubona & Ubuntu',
+            subtitle: 'Philosophy of interconnected humanity',
+            isCurrent: true,
+            hasPlayButton: true,
+            stars: 1,
+            questions: [
+              {
+                prompt: 'What is the literal translation of "Sawubona"?',
+                options: ['We see you', 'Good day', 'Where are you going', 'God bless you'],
+                correctIndex: 0,
+                explanation: '"Sawubona" means "We see you" — validating your existence and presence in the community.'
+              }
+            ]
+          }
+        ]
+      },
+      lingala: {
+        id: 'lingala',
+        name: 'Lingala',
+        nativeName: 'Lingála',
+        greeting: 'Mbote na yo!',
+        greetingEn: 'Hello to you!',
+        tagline: 'Vibrant Bantu language of Congo music, Rumba, and central trade',
+        speakers: '20+ Million',
+        ttsCode: 'fr-CD',
+        accentColor: '#10b981',
+        toneGuide: 'High tone (acute) and Low tone (unmarked)',
+        lessons: [
+          {
+            id: 'li-greetings',
+            title: 'Mbote na biso',
+            subtitle: 'Warm Congolese greetings & daily interaction',
+            completed: true,
+            stars: 3,
+            questions: [
+              {
+                prompt: 'What does "Mbote" mean in Lingala?',
+                options: ['Hello / Greetings', 'Goodbye', 'Thank you', 'Food'],
+                correctIndex: 0,
+                explanation: '"Mbote" is the universal greeting across Kinshasa and Brazzaville.'
+              }
+            ]
+          },
+          {
+            id: 'li-music-terms',
+            title: 'Rumba & Everyday Expressions',
+            subtitle: 'Nalingi yo (I love you) and market banter',
+            isCurrent: true,
+            hasPlayButton: true,
+            stars: 1,
+            questions: [
+              {
+                prompt: 'Translate "Nalingi yo":',
+                options: ['I love you / I like you', 'I don\'t know', 'Where is it?', 'Come here'],
+                correctIndex: 0,
+                explanation: '"Nalingi yo" is one of the most famous poetic phrases in Congolese Rumba.'
+              }
+            ]
+          }
+        ]
+      }
+    };
+
+    function App() {
+      // LocalStorage backed gamification state
+      const [currentLanguageId, setCurrentLanguageId] = useState(() => {
+        return localStorage.getItem('baobab_lang') || 'yoruba';
+      });
+      const [xp, setXp] = useState(() => {
+        const saved = localStorage.getItem('baobab_xp');
+        return saved ? parseInt(saved, 10) : 140;
+      });
+      const [hearts, setHearts] = useState(() => {
+        const saved = localStorage.getItem('baobab_hearts');
+        return saved !== null ? parseInt(saved, 10) : 4;
+      });
+      const [streak, setStreak] = useState(() => {
+        const saved = localStorage.getItem('baobab_streak');
+        return saved ? parseInt(saved, 10) : 7;
+      });
+
+      // Active view state:
+      // 'app' (Mobile Simulator UI from screenshot)
+      // 'learn_seo' (Specific language page: /learn/yoruba, etc.)
+      // 'privacy', 'terms', 'faq'
+      const [currentView, setCurrentView] = useState('app');
+      const [activeTab, setActiveTab] = useState('review'); // 'review', 'ai_tutor', 'dialogue', 'profile'
+      const [selectedLevelTab, setSelectedLevelTab] = useState('A1 Beginner'); // 'A1 Beginner', 'Elementary', 'Intermediate'
+      
+      // Active Quiz modal state
+      const [activeQuiz, setActiveQuiz] = useState(null);
+      const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
+      const [selectedOption, setSelectedOption] = useState(null);
+      const [isAnswerSubmitted, setIsAnswerSubmitted] = useState(false);
+      const [isAnswerCorrect, setIsAnswerCorrect] = useState(false);
+      const [quizCompleted, setQuizCompleted] = useState(false);
+
+      // AI Tutor chat state
+      const [chatMessages, setChatMessages] = useState([
+        {
+          sender: 'ai',
+          text: 'Ẹ ń lẹ́ o! I am your Baobabble AI Tutor for African Languages. I adapt to your CEFR level and correct pitch tones. What would you like to practice today?'
+        }
+      ]);
+      const [chatInput, setChatInput] = useState('');
+      const [isAiTyping, setIsAiTyping] = useState(false);
+
+      // Save to localStorage
+      useEffect(() => {
+        localStorage.setItem('baobab_lang', currentLanguageId);
+      }, [currentLanguageId]);
+
+      useEffect(() => {
+        localStorage.setItem('baobab_xp', xp.toString());
+      }, [xp]);
+
+      useEffect(() => {
+        localStorage.setItem('baobab_hearts', hearts.toString());
+      }, [hearts]);
+
+      useEffect(() => {
+        localStorage.setItem('baobab_streak', streak.toString());
+      }, [streak]);
+
+      // URL path synchronization
+      useEffect(() => {
+        const path = window.location.pathname.replace(/\/$/, '');
+        if (path.startsWith('/learn/')) {
+          const lang = path.replace('/learn/', '');
+          if (LANGUAGES[lang]) {
+            setCurrentLanguageId(lang);
+            setCurrentView('learn_seo');
+          }
+        } else if (path === '/privacy') {
+          setCurrentView('privacy');
+        } else if (path === '/terms') {
+          setCurrentView('terms');
+        } else if (path === '/faq') {
+          setCurrentView('faq');
+        }
+      }, []);
+
+      const currentLang = LANGUAGES[currentLanguageId] || LANGUAGES.yoruba;
+
+      // Handle navigation
+      const navigateTo = (view, lang = null) => {
+        if (lang) {
+          setCurrentLanguageId(lang);
+        }
+        setCurrentView(view);
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      };
+
+      // Launch Quiz
+      const startQuiz = (lesson) => {
+        if (hearts <= 0) {
+          alert('You need hearts to start a lesson! We refilled one heart for you.');
+          setHearts(1);
+          return;
+        }
+        setActiveQuiz(lesson);
+        setCurrentQuestionIndex(0);
+        setSelectedOption(null);
+        setIsAnswerSubmitted(false);
+        setQuizCompleted(false);
+      };
+
+      const handleOptionSelect = (index) => {
+        if (isAnswerSubmitted) return;
+        setSelectedOption(index);
+      };
+
+      const submitAnswer = () => {
+        if (selectedOption === null || isAnswerSubmitted) return;
+        const q = activeQuiz.questions[currentQuestionIndex];
+        const correct = selectedOption === q.correctIndex;
+        setIsAnswerCorrect(correct);
+        setIsAnswerSubmitted(true);
+
+        if (correct) {
+          playSuccessSound();
+          setXp(prev => prev + 15);
+        } else {
+          playErrorSound();
+          setHearts(prev => Math.max(0, prev - 1));
+        }
+      };
+
+      const nextQuestion = () => {
+        if (currentQuestionIndex + 1 < activeQuiz.questions.length) {
+          setCurrentQuestionIndex(prev => prev + 1);
+          setSelectedOption(null);
+          setIsAnswerSubmitted(false);
+        } else {
+          setQuizCompleted(true);
+          playSuccessSound();
+        }
+      };
+
+      // AI Chat interaction
+      const handleSendMessage = (textToSend = null) => {
+        const query = textToSend || chatInput;
+        if (!query.trim()) return;
+
+        const newMessages = [...chatMessages, { sender: 'user', text: query }];
+        setChatMessages(newMessages);
+        if (!textToSend) setChatInput('');
+        setIsAiTyping(true);
+
+        setTimeout(() => {
+          let responseText = '';
+          const lower = query.toLowerCase();
+          
+          if (lower.includes('tone') || lower.includes('ami ohun') || lower.includes('dò')) {
+            responseText = `In ${currentLang.name}, tones change meanings completely! Remember: High (Mí /) like 'Ọkọ́' (Hoe), Mid (Re -) like 'Ọkọ' (Husband), and Low (Dò \\) like 'Ọkọ̀' (Vehicle). Practice singing the pitch!`;
+          } else if (lower.includes('greet') || lower.includes('hello') || lower.includes('respect')) {
+            responseText = `For ${currentLang.name}, honorifics are essential. Use "${currentLang.greeting}" when addressing elders or groups to demonstrate cultural respect.`;
+          } else if (lower.includes('market') || lower.includes('price')) {
+            responseText = `In the market dialogue: You ask "Èló ni?" (How much is it?). The seller responds, and you politely counter with "Ẹ dín owó kù" (Please reduce the price). Would you like to practice that roleplay?`;
+          } else {
+            responseText = `Great question on ${currentLang.name}! At your ${selectedLevelTab} level, focus on matching the melody and vowel quality. Let's do a quick drill: try saying "${currentLang.greeting}" with authentic pitch.`;
+          }
+
+          setChatMessages([...newMessages, { sender: 'ai', text: responseText }]);
+          setIsAiTyping(false);
+        }, 850);
+      };
+
+      return (
+        <div className="min-h-screen flex flex-col justify-between selection:bg-brand-500 selection:text-slate-900">
+          
+          {/* Universal Header / Navigation Bar for Web & Global Access */}
+          <header className="border-b border-cardBorder bg-[#0c1220]/90 backdrop-blur-md sticky top-0 z-40 px-4 py-3">
+            <div className="max-w-6xl mx-auto flex items-center justify-between">
+              <div 
+                onClick={() => navigateTo('app')} 
+                className="flex items-center gap-3 cursor-pointer group"
+              >
+                <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-brand-500 to-brand-700 flex items-center justify-center shadow-lg shadow-brand-500/20 group-hover:scale-105 transition-transform">
+                  <span className="text-xl font-black text-slate-950">🌳</span>
+                </div>
+                <div>
+                  <div className="flex items-center gap-2">
+                    <span className="text-xl font-black tracking-tight text-white font-heading">Baobabble</span>
+                    <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-brand-500/20 text-brand-400 border border-brand-500/30">7 LANGUAGES</span>
+                  </div>
+                  <p className="text-xs text-slate-400 hidden sm:block">Authentic African Languages & AI Tutor</p>
+                </div>
+              </div>
+
+              {/* Navigation Links */}
+              <nav className="hidden md:flex items-center gap-6 text-sm font-medium">
+                <button 
+                  onClick={() => navigateTo('app')} 
+                  className={`transition-colors ${currentView === 'app' ? 'text-brand-400 font-bold' : 'text-slate-300 hover:text-white'}`}
+                >
+                  Interactive App
+                </button>
+                <div className="relative group py-2">
+                  <span className="text-slate-300 hover:text-white flex items-center gap-1 cursor-pointer">
+                    Courses ▾
+                  </span>
+                  <div className="absolute top-full left-0 hidden group-hover:block w-48 bg-cardBg border border-cardBorder rounded-xl shadow-2xl p-2 z-50">
+                    {Object.values(LANGUAGES).map(lang => (
+                      <button
+                        key={lang.id}
+                        onClick={() => navigateTo('learn_seo', lang.id)}
+                        className="w-full text-left px-3 py-2 rounded-lg text-xs font-semibold text-slate-200 hover:bg-brand-500/20 hover:text-brand-300 transition-colors"
+                      >
+                        Learn {lang.name}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+                <button 
+                  onClick={() => navigateTo('faq')} 
+                  className={`transition-colors ${currentView === 'faq' ? 'text-brand-400 font-bold' : 'text-slate-300 hover:text-white'}`}
+                >
+                  FAQ
+                </button>
+                <button 
+                  onClick={() => navigateTo('privacy')} 
+                  className={`transition-colors ${currentView === 'privacy' ? 'text-brand-400 font-bold' : 'text-slate-300 hover:text-white'}`}
+                >
+                  Privacy
+                </button>
+              </nav>
+
+              {/* Quick Status / Mobile Toggle */}
+              <div className="flex items-center gap-3">
+                <div className="flex items-center gap-2 bg-slate-800/80 px-3 py-1.5 rounded-full border border-slate-700 text-xs font-bold">
+                  <span className="text-amber-400">⚡</span>
+                  <span>{xp} XP</span>
+                  <span className="text-rose-500 ml-1">❤️</span>
+                  <span>{hearts}</span>
+                  <span className="text-orange-400 ml-1">🔥</span>
+                  <span>{streak}d</span>
+                </div>
+                <button
+                  onClick={() => navigateTo('app')}
+                  className="px-4 py-1.5 text-xs font-bold rounded-full bg-brand-500 text-slate-950 hover:bg-brand-400 transition-all shadow-md shadow-brand-500/30 flex items-center gap-1.5"
+                >
+                  <span>Launch App</span>
+                  <span>→</span>
+                </button>
+              </div>
+            </div>
+          </header>
+
+          {/* MAIN CONTENT AREA */}
+          <main className="flex-1 max-w-6xl mx-auto w-full px-4 py-6">
+
+            {/* VIEW 1: EXACT MOBILE UI CLONE FROM SCREENSHOT */}
+            {currentView === 'app' && (
+              <div className="max-w-md mx-auto">
+                {/* Mobile Device Frame styling */}
+                <div className="bg-[#0b0f1a] border border-slate-800 rounded-[2.5rem] shadow-2xl overflow-hidden p-1 transition-all">
+                  
+                  {/* Top Bar matching screenshot: 8:37, Language Selector, 140 XP, 4 Hearts, Profile */}
+                  <div className="bg-[#111726] rounded-t-[2.2rem] px-5 pt-3 pb-3 border-b border-slate-800/80">
+                    {/* Status row: 8:37, Signal, Wifi, Battery */}
+                    <div className="flex items-center justify-between text-xs font-semibold text-slate-400 mb-3 px-1">
+                      <span>8:37</span>
+                      <div className="flex items-center gap-1.5">
+                        <span className="text-[10px]">●●●●</span>
+                        <span>📶</span>
+                        <span>🔋</span>
+                      </div>
+                    </div>
+
+                    {/* App Header Bar: Language Dropdown, 140 XP, 4 Hearts, Profile */}
+                    <div className="flex items-center justify-between">
+                      {/* Language dropdown selector */}
+                      <div className="relative">
+                        <select
+                          value={currentLanguageId}
+                          onChange={(e) => setCurrentLanguageId(e.target.value)}
+                          className="bg-slate-800/90 text-white font-bold text-sm px-3 py-1.5 rounded-xl border border-slate-700 focus:outline-none focus:border-brand-500 cursor-pointer appearance-none pr-7 shadow-sm"
+                        >
+                          <option value="yoruba">🇳🇬 Yoruba</option>
+                          <option value="igbo">🇳🇬 Igbo</option>
+                          <option value="hausa">🇳🇬 Hausa</option>
+                          <option value="amharic">🇪🇹 Amharic</option>
+                          <option value="swahili">🇰🇪 Swahili</option>
+                          <option value="zulu">🇿🇦 isiZulu</option>
+                          <option value="lingala">🇨🇩 Lingala</option>
+                        </select>
+                        <span className="absolute right-2.5 top-2.5 text-xs pointer-events-none text-slate-400">▾</span>
+                      </div>
+
+                      {/* Stats badges matching screenshot: 140 XP, 4 Hearts */}
+                      <div className="flex items-center gap-2">
+                        <div className="flex items-center gap-1 bg-amber-500/10 border border-amber-500/30 px-2.5 py-1 rounded-full text-xs font-extrabold text-amber-400 shadow-sm">
+                          <span>⚡</span>
+                          <span>{xp} XP</span>
+                        </div>
+                        <div className="flex items-center gap-1 bg-rose-500/10 border border-rose-500/30 px-2.5 py-1 rounded-full text-xs font-extrabold text-rose-400 shadow-sm">
+                          <span>❤️</span>
+                          <span>{hearts}</span>
+                        </div>
+
+                        {/* Profile icon */}
+                        <div 
+                          onClick={() => setActiveTab('profile')}
+                          className="w-8 h-8 rounded-full bg-gradient-to-tr from-brand-500 to-emerald-300 flex items-center justify-center text-xs font-black text-slate-950 cursor-pointer ring-2 ring-brand-500/40 hover:scale-105 transition-transform"
+                        >
+                          👤
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* SCREEN BODY BASED ON BOTTOM NAV TAB */}
+                  <div className="p-4 min-h-[520px] bg-[#0c1220]">
+
+                    {/* TAB 1: REVIEW / LESSON PATH (CLONED EXACTLY FROM SCREENSHOT) */}
+                    {activeTab === 'review' && (
+                      <div className="space-y-4">
+
+                        {/* Hero Card: Green gradient "Yoruba (Ede Yoruba) E n le o!" */}
+                        <div className="relative overflow-hidden rounded-2xl bg-gradient-to-r from-emerald-600 via-green-600 to-emerald-700 p-5 text-white shadow-lg shadow-green-900/30">
+                          <div className="flex items-center justify-between mb-2">
+                            <span className="text-[11px] font-extrabold tracking-wider uppercase px-2.5 py-0.5 rounded-full bg-black/25 text-emerald-100 border border-white/20">
+                              CURRENT FOCUS
+                            </span>
+                            <button
+                              onClick={() => speakText(currentLang.greeting, currentLang.ttsCode)}
+                              className="w-7 h-7 rounded-full bg-white/20 hover:bg-white/30 flex items-center justify-center text-xs transition-colors"
+                              title="Listen to native pronunciation"
+                            >
+                              🔊
+                            </button>
+                          </div>
+
+                          <h2 className="text-xl font-black font-heading tracking-tight">
+                            {currentLang.name} ({currentLang.nativeName})
+                          </h2>
+                          <p className="text-sm font-semibold text-emerald-100 mt-0.5">
+                            "{currentLang.greeting}" — {currentLang.greetingEn}
+                          </p>
+
+                          <div className="mt-3 pt-3 border-t border-white/20 flex items-center justify-between text-xs text-emerald-100">
+                            <span>{currentLang.toneGuide}</span>
+                            <span className="font-bold bg-white/20 px-2 py-0.5 rounded-full">{currentLang.speakers}</span>
+                          </div>
+                        </div>
+
+                        {/* Level Tabs: A1 Beginner, Elementary, Intermediate */}
+                        <div className="flex bg-[#162035] p-1 rounded-xl border border-slate-800">
+                          {['A1 Beginner', 'Elementary', 'Intermediate'].map(tab => (
+                            <button
+                              key={tab}
+                              onClick={() => setSelectedLevelTab(tab)}
+                              className={`flex-1 py-1.5 text-xs font-bold rounded-lg transition-all ${
+                                selectedLevelTab === tab 
+                                  ? 'bg-brand-500 text-slate-950 shadow-md' 
+                                  : 'text-slate-400 hover:text-white'
+                              }`}
+                            >
+                              {tab}
+                            </button>
+                          ))}
+                        </div>
+
+                        {/* Lesson List from Screenshot */}
+                        <div className="space-y-3">
+                          {currentLang.lessons.map((lesson, idx) => {
+                            return (
+                              <div
+                                key={lesson.id}
+                                className={`rounded-2xl p-4 transition-all border ${
+                                  lesson.isCurrent
+                                    ? 'bg-[#15233e] border-brand-500/60 shadow-lg shadow-brand-500/10'
+                                    : 'bg-[#121a2c] border-slate-800 hover:border-slate-700'
+                                }`}
+                              >
+                                <div className="flex items-center justify-between">
+                                  <div className="flex-1 pr-3">
+                                    <div className="flex items-center gap-2 mb-1">
+                                      <span className="w-5 h-5 rounded-full bg-slate-800 border border-slate-700 flex items-center justify-center text-[10px] font-bold text-slate-400">
+                                        {idx + 1}
+                                      </span>
+                                      <h3 className="text-sm font-bold text-white tracking-tight">
+                                        {lesson.title}
+                                      </h3>
+                                    </div>
+                                    <p className="text-xs text-slate-400 pl-7">
+                                      {lesson.subtitle}
+                                    </p>
+                                  </div>
+
+                                  {/* Right side action or prominent play button */}
+                                  <div>
+                                    {lesson.hasPlayButton ? (
+                                      <button
+                                        onClick={() => startQuiz(lesson)}
+                                        className="w-12 h-12 rounded-full bg-brand-500 hover:bg-brand-400 text-slate-950 font-black flex items-center justify-center text-lg shadow-lg shadow-brand-500/40 hover:scale-105 transition-all pulse-glow"
+                                        title="Start Interactive Quiz"
+                                      >
+                                        ▶
+                                      </button>
+                                    ) : lesson.completed ? (
+                                      <button
+                                        onClick={() => startQuiz(lesson)}
+                                        className="w-9 h-9 rounded-full bg-emerald-500/20 text-brand-400 border border-brand-500/40 font-bold flex items-center justify-center text-xs hover:bg-brand-500 hover:text-slate-950 transition-colors"
+                                      >
+                                        ✓
+                                      </button>
+                                    ) : (
+                                      <button
+                                        onClick={() => startQuiz(lesson)}
+                                        className="w-9 h-9 rounded-full bg-slate-800 text-slate-400 border border-slate-700 font-bold flex items-center justify-center text-xs hover:border-brand-500 hover:text-white transition-colors"
+                                      >
+                                        ★
+                                      </button>
+                                    )}
+                                  </div>
+                                </div>
+                              </div>
+                            );
+                          })}
+                        </div>
+                      </div>
+                    )}
+
+                    {/* TAB 2: AI TUTOR (GEMINI CONTEXT-AWARE ASSISTANT) */}
+                    {activeTab === 'ai_tutor' && (
+                      <div className="flex flex-col h-[480px]">
+                        <div className="bg-slate-800/60 p-3 rounded-xl border border-slate-700 flex items-center justify-between mb-3">
+                          <div className="flex items-center gap-2">
+                            <span className="w-2.5 h-2.5 rounded-full bg-brand-500 animate-ping"></span>
+                            <span className="text-xs font-bold text-brand-400">Gemini Native AI Tutor</span>
+                          </div>
+                          <span className="text-[11px] text-slate-400 font-semibold">{currentLang.name} • {selectedLevelTab}</span>
+                        </div>
+
+                        {/* Quick Prompts */}
+                        <div className="flex gap-1.5 overflow-x-auto pb-2 mb-2 custom-scrollbar">
+                          {[
+                            `Explain ${currentLang.name} tones`,
+                            'Fix my sentence',
+                            'Market haggling dialogue',
+                            'Cultural greetings etiquette'
+                          ].map(prompt => (
+                            <button
+                              key={prompt}
+                              onClick={() => handleSendMessage(prompt)}
+                              className="whitespace-nowrap text-[11px] font-semibold px-2.5 py-1 rounded-full bg-slate-800 border border-slate-700 hover:border-brand-500 text-slate-300 hover:text-brand-300 transition-colors"
+                            >
+                              {prompt}
+                            </button>
+                          ))}
+                        </div>
+
+                        {/* Chat Messages */}
+                        <div className="flex-1 overflow-y-auto space-y-2.5 pr-1 custom-scrollbar">
+                          {chatMessages.map((msg, i) => (
+                            <div 
+                              key={i} 
+                              className={`flex ${msg.sender === 'user' ? 'justify-end' : 'justify-start'}`}
+                            >
+                              <div className={`max-w-[85%] rounded-2xl px-3.5 py-2.5 text-xs leading-relaxed ${
+                                msg.sender === 'user'
+                                  ? 'bg-brand-500 text-slate-950 font-semibold rounded-br-none'
+                                  : 'bg-[#18233c] text-slate-200 border border-slate-700/80 rounded-bl-none shadow-md'
+                              }`}>
+                                {msg.text}
+                              </div>
+                            </div>
+                          ))}
+                          {isAiTyping && (
+                            <div className="flex justify-start">
+                              <div className="bg-[#18233c] text-slate-400 border border-slate-700 text-xs px-3 py-2 rounded-2xl rounded-bl-none animate-pulse">
+                                Analyzing pitch contours & grammar...
+                              </div>
+                            </div>
+                          )}
+                        </div>
+
+                        {/* Chat Input */}
+                        <div className="mt-3 pt-2 border-t border-slate-800 flex gap-2">
+                          <input
+                            type="text"
+                            value={chatInput}
+                            onChange={(e) => setChatInput(e.target.value)}
+                            onKeyDown={(e) => e.key === 'Enter' && handleSendMessage()}
+                            placeholder={`Ask in ${currentLang.name} or English...`}
+                            className="flex-1 bg-slate-800/90 text-xs text-white rounded-xl px-3 py-2.5 border border-slate-700 focus:outline-none focus:border-brand-500"
+                          />
+                          <button
+                            onClick={() => handleSendMessage()}
+                            className="bg-brand-500 text-slate-950 font-bold px-3.5 rounded-xl hover:bg-brand-400 transition-colors text-xs"
+                          >
+                            Send
+                          </button>
+                        </div>
+                      </div>
+                    )}
+
+                    {/* TAB 3: DIALOGUE (CULTURAL ROLEPLAY) */}
+                    {activeTab === 'dialogue' && (
+                      <div className="space-y-3">
+                        <div className="bg-[#15233e] p-3.5 rounded-2xl border border-slate-800">
+                          <span className="text-[10px] font-extrabold uppercase tracking-wider text-brand-400 bg-brand-500/10 px-2 py-0.5 rounded-full">
+                            Roleplay Scenario
+                          </span>
+                          <h4 className="text-sm font-bold text-white mt-1">Lagos / Market Negotiation</h4>
+                          <p className="text-xs text-slate-400">Buying fresh goods with authentic courtesy.</p>
+                        </div>
+
+                        <div className="space-y-2.5">
+                          {[
+                            { speaker: 'Trader (Oníbàárà)', text: 'Ẹ káàbọ̀ o! Kí lẹ fẹ́ ra lónìí?', en: 'Welcome! What would you like to buy today?' },
+                            { speaker: 'You (Ìwọ)', text: 'Ẹ ṣeé o. Èló ni àwọn ata wọ̀nyí?', en: 'Thank you. How much are these peppers?' },
+                            { speaker: 'Trader (Oníbàárà)', text: 'Ọgọ́rùn-ún náírà péré ni.', en: 'It is just one hundred naira.' },
+                            { speaker: 'You (Ìwọ)', text: 'Ẹ dín in kù fún mi díẹ̀!', en: 'Please reduce it a little for me!' }
+                          ].map((line, i) => (
+                            <div key={i} className="bg-[#121a2c] p-3 rounded-xl border border-slate-800 flex items-start justify-between">
+                              <div>
+                                <span className="text-[11px] font-bold text-brand-400">{line.speaker}</span>
+                                <p className="text-xs font-semibold text-white mt-0.5">{line.text}</p>
+                                <p className="text-[11px] text-slate-400 italic">{line.en}</p>
+                              </div>
+                              <button
+                                onClick={() => speakText(line.text, currentLang.ttsCode)}
+                                className="w-8 h-8 rounded-full bg-slate-800 hover:bg-brand-500 hover:text-slate-950 text-slate-300 flex items-center justify-center text-xs transition-colors"
+                                title="Listen"
+                              >
+                                🔊
+                              </button>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+
+                    {/* TAB 4: PROFILE */}
+                    {activeTab === 'profile' && (
+                      <div className="space-y-4">
+                        <div className="text-center py-4 bg-[#15233e] rounded-2xl border border-slate-800">
+                          <div className="w-16 h-16 rounded-full bg-gradient-to-tr from-brand-500 to-emerald-300 mx-auto flex items-center justify-center text-2xl font-black text-slate-950 shadow-lg shadow-brand-500/20">
+                            🌍
+                          </div>
+                          <h3 className="text-base font-bold text-white mt-2">African Polyglot Scholar</h3>
+                          <p className="text-xs text-brand-400 font-semibold">{currentLang.name} Pathway • {selectedLevelTab}</p>
+                        </div>
+
+                        <div className="grid grid-cols-3 gap-2 text-center">
+                          <div className="bg-[#121a2c] p-3 rounded-xl border border-slate-800">
+                            <span className="text-amber-400 text-base font-black">⚡ {xp}</span>
+                            <p className="text-[10px] text-slate-400 font-bold uppercase mt-1">Total XP</p>
+                          </div>
+                          <div className="bg-[#121a2c] p-3 rounded-xl border border-slate-800">
+                            <span className="text-orange-400 text-base font-black">🔥 {streak} Days</span>
+                            <p className="text-[10px] text-slate-400 font-bold uppercase mt-1">Streak</p>
+                          </div>
+                          <div className="bg-[#121a2c] p-3 rounded-xl border border-slate-800">
+                            <span className="text-rose-400 text-base font-black">❤️ {hearts}/5</span>
+                            <p className="text-[10px] text-slate-400 font-bold uppercase mt-1">Hearts</p>
+                          </div>
+                        </div>
+
+                        <div className="bg-[#121a2c] p-3.5 rounded-xl border border-slate-800 flex items-center justify-between">
+                          <div>
+                            <h4 className="text-xs font-bold text-white">Replenish Energy</h4>
+                            <p className="text-[11px] text-slate-400">Refill all 5 hearts to continue learning.</p>
+                          </div>
+                          <button
+                            onClick={() => {
+                              setHearts(5);
+                              playSuccessSound();
+                            }}
+                            className="bg-brand-500 text-slate-950 font-bold text-xs px-3 py-1.5 rounded-lg hover:bg-brand-400 transition-colors"
+                          >
+                            Refill (+5 ❤️)
+                          </button>
+                        </div>
+                      </div>
+                    )}
+
+                  </div>
+
+                  {/* BOTTOM NAVIGATION BAR FROM SCREENSHOT */}
+                  {/* Review, AI Tutor, Dialogue, Profile */}
+                  <div className="bg-[#111726] border-t border-slate-800/80 px-3 py-2.5 rounded-b-[2.2rem]">
+                    <div className="grid grid-cols-4 gap-1 text-center">
+                      <button
+                        onClick={() => setActiveTab('review')}
+                        className={`flex flex-col items-center justify-center py-1 rounded-xl transition-all ${
+                          activeTab === 'review'
+                            ? 'text-brand-400 font-bold bg-brand-500/10'
+                            : 'text-slate-400 hover:text-slate-200'
+                        }`}
+                      >
+                        <span className="text-base">📖</span>
+                        <span className="text-[10px] mt-0.5">Review</span>
+                      </button>
+
+                      <button
+                        onClick={() => setActiveTab('ai_tutor')}
+                        className={`flex flex-col items-center justify-center py-1 rounded-xl transition-all ${
+                          activeTab === 'ai_tutor'
+                            ? 'text-brand-400 font-bold bg-brand-500/10'
+                            : 'text-slate-400 hover:text-slate-200'
+                        }`}
+                      >
+                        <span className="text-base">🤖</span>
+                        <span className="text-[10px] mt-0.5">AI Tutor</span>
+                      </button>
+
+                      <button
+                        onClick={() => setActiveTab('dialogue')}
+                        className={`flex flex-col items-center justify-center py-1 rounded-xl transition-all ${
+                          activeTab === 'dialogue'
+                            ? 'text-brand-400 font-bold bg-brand-500/10'
+                            : 'text-slate-400 hover:text-slate-200'
+                        }`}
+                      >
+                        <span className="text-base">💬</span>
+                        <span className="text-[10px] mt-0.5">Dialogue</span>
+                      </button>
+
+                      <button
+                        onClick={() => setActiveTab('profile')}
+                        className={`flex flex-col items-center justify-center py-1 rounded-xl transition-all ${
+                          activeTab === 'profile'
+                            ? 'text-brand-400 font-bold bg-brand-500/10'
+                            : 'text-slate-400 hover:text-slate-200'
+                        }`}
+                      >
+                        <span className="text-base">👤</span>
+                        <span className="text-[10px] mt-0.5">Profile</span>
+                      </button>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+            )}
+
+            {/* VIEW 2: DEDICATED LANGUAGE SEO COURSE PAGE (/learn/yoruba, /learn/swahili, etc.) */}
+            {currentView === 'learn_seo' && (
+              <div className="space-y-8 py-4">
+                <div className="bg-gradient-to-br from-cardBg to-[#0d1627] p-8 rounded-3xl border border-cardBorder shadow-xl relative overflow-hidden">
+                  <div className="max-w-2xl">
+                    <span className="px-3 py-1 rounded-full text-xs font-black bg-brand-500/20 text-brand-400 border border-brand-500/30 uppercase tracking-wider">
+                      Comprehensive CEFR A1 - C2 Curriculum
+                    </span>
+                    <h1 className="text-3xl sm:text-4xl font-black font-heading mt-3 text-white">
+                      Learn {currentLang.name} ({currentLang.nativeName}) Online
+                    </h1>
+                    <p className="text-slate-300 text-sm sm:text-base mt-2 leading-relaxed">
+                      {currentLang.tagline}. Spoken by over <span className="font-bold text-brand-400">{currentLang.speakers}</span> people across Africa and the global diaspora.
+                    </p>
+
+                    <div className="mt-6 flex flex-wrap gap-3">
+                      <button
+                        onClick={() => navigateTo('app')}
+                        className="px-6 py-3 rounded-xl bg-brand-500 text-slate-950 font-bold text-sm hover:bg-brand-400 transition-all shadow-lg shadow-brand-500/30 flex items-center gap-2"
+                      >
+                        <span>Start Learning {currentLang.name} Now</span>
+                        <span>→</span>
+                      </button>
+                      <button
+                        onClick={() => speakText(currentLang.greeting, currentLang.ttsCode)}
+                        className="px-5 py-3 rounded-xl bg-slate-800 text-white font-bold text-sm border border-slate-700 hover:border-brand-500 transition-all flex items-center gap-2"
+                      >
+                        <span>Pronounce "{currentLang.greeting}"</span>
+                        <span>🔊</span>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Educational Curriculum Pillars */}
+                <div className="grid md:grid-cols-3 gap-6">
+                  <div className="bg-cardBg p-6 rounded-2xl border border-cardBorder">
+                    <div className="w-10 h-10 rounded-xl bg-brand-500/20 text-brand-400 flex items-center justify-center font-bold text-lg mb-4">
+                      🎵
+                    </div>
+                    <h3 className="text-lg font-bold text-white mb-2">Tonal Accuracy & Pitch</h3>
+                    <p className="text-xs text-slate-400 leading-relaxed">
+                      {currentLang.toneGuide}. In tonal African languages, the same phonetic spelling carries vastly different meanings depending on pitch contour.
+                    </p>
+                  </div>
+
+                  <div className="bg-cardBg p-6 rounded-2xl border border-cardBorder">
+                    <div className="w-10 h-10 rounded-xl bg-sky-500/20 text-sky-400 flex items-center justify-center font-bold text-lg mb-4">
+                      🤖
+                    </div>
+                    <h3 className="text-lg font-bold text-white mb-2">Contextual AI Tutor</h3>
+                    <p className="text-xs text-slate-400 leading-relaxed">
+                      Powered by native language rules. Never outputs hallucinated or broken grammar. Tailored to your CEFR level from absolute beginner to fluent speaker.
+                    </p>
+                  </div>
+
+                  <div className="bg-cardBg p-6 rounded-2xl border border-cardBorder">
+                    <div className="w-10 h-10 rounded-xl bg-amber-500/20 text-amber-400 flex items-center justify-center font-bold text-lg mb-4">
+                      🏛️
+                    </div>
+                    <h3 className="text-lg font-bold text-white mb-2">Cultural Etiquette & Honorifics</h3>
+                    <p className="text-xs text-slate-400 leading-relaxed">
+                      Master the respect forms used with elders, traditional rulers, and ceremonial greetings like {currentLang.greeting}.
+                    </p>
+                  </div>
+                </div>
+
+                {/* Switch to other languages */}
+                <div className="bg-slate-900/60 p-6 rounded-2xl border border-cardBorder">
+                  <h3 className="text-base font-bold text-white mb-3">Explore other African languages:</h3>
+                  <div className="flex flex-wrap gap-2">
+                    {Object.values(LANGUAGES).map(lang => (
+                      <button
+                        key={lang.id}
+                        onClick={() => navigateTo('learn_seo', lang.id)}
+                        className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all border ${
+                          currentLanguageId === lang.id
+                            ? 'bg-brand-500 text-slate-950 border-brand-500'
+                            : 'bg-slate-800 text-slate-300 border-slate-700 hover:border-brand-500'
+                        }`}
+                      >
+                        {lang.name} ({lang.nativeName})
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {/* VIEW 3: FAQ PAGE (/faq) */}
+            {currentView === 'faq' && (
+              <div className="max-w-3xl mx-auto space-y-6 py-4">
+                <div className="text-center space-y-2">
+                  <h1 className="text-3xl font-black font-heading text-white">Frequently Asked Questions</h1>
+                  <p className="text-sm text-slate-400">Everything you need to know about Baobabble and our African language learning platform.</p>
+                </div>
+
+                <div className="space-y-4">
+                  {[
+                    {
+                      q: 'Which African languages are supported?',
+                      a: 'Baobabble currently offers full CEFR curricula (A1 to C2) for 7 major African languages: Yoruba, Igbo, Hausa, Amharic, Swahili, isiZulu, and Lingala.'
+                    },
+                    {
+                      q: 'How does Baobabble handle tonal languages?',
+                      a: 'Unlike generic language apps that ignore tones, Baobabble incorporates solfège musical pitch guides (High Mí, Mid Re, Low Dò), tonal diacritics, and native audio recognition to ensure you speak accurately.'
+                    },
+                    {
+                      q: 'Is Baobabble free to use?',
+                      a: 'Yes! The core learning loops, daily streak tracker, and introductory lessons are free. Learners earn XP and replenish hearts by completing daily reviews.'
+                    },
+                    {
+                      q: 'Does Baobabble work on both desktop and mobile devices?',
+                      a: 'Yes. Baobabble is fully responsive, works on iOS, Android, tablets, and desktop browsers, and can be installed as a PWA directly from your browser.'
+                    }
+                  ].map((faq, i) => (
+                    <div key={i} className="bg-cardBg p-5 rounded-2xl border border-cardBorder">
+                      <h3 className="text-base font-bold text-white mb-2">{faq.q}</h3>
+                      <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">{faq.a}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {/* VIEW 4: PRIVACY POLICY (/privacy) */}
+            {currentView === 'privacy' && (
+              <div className="max-w-3xl mx-auto bg-cardBg p-8 rounded-3xl border border-cardBorder space-y-4 text-xs sm:text-sm text-slate-300 leading-relaxed py-8">
+                <h1 className="text-2xl font-black font-heading text-white">Privacy Policy</h1>
+                <p className="text-xs text-slate-400">Last updated: October 2026</p>
+                <p>
+                  At Baobabble, accessible from https://baobabble.polsia.io, one of our main priorities is the privacy of our global learners. This Privacy Policy document outlines the types of information collected and how we use it.
+                </p>
+                <h3 className="text-base font-bold text-white pt-2">Data We Collect</h3>
+                <p>
+                  We store learning progress (such as XP, streak count, completed lessons, and CEFR level) locally on your device (via browser localStorage) and securely in cloud-backed profiles when authenticated. We do not sell your personal data.
+                </p>
+                <h3 className="text-base font-bold text-white pt-2">Audio & Pronunciation</h3>
+                <p>
+                  Microphone input used during pronunciation practice is evaluated on-device through standard Web Speech APIs and is not recorded, stored, or distributed to third parties.
+                </p>
+              </div>
+            )}
+
+            {/* VIEW 5: TERMS OF SERVICE (/terms) */}
+            {currentView === 'terms' && (
+              <div className="max-w-3xl mx-auto bg-cardBg p-8 rounded-3xl border border-cardBorder space-y-4 text-xs sm:text-sm text-slate-300 leading-relaxed py-8">
+                <h1 className="text-2xl font-black font-heading text-white">Terms of Service</h1>
+                <p className="text-xs text-slate-400">Last updated: October 2026</p>
+                <p>
+                  By accessing or using the Baobabble website, mobile web app, or native applications, you agree to be bound by these Terms of Service.
+                </p>
+                <h3 className="text-base font-bold text-white pt-2">Educational Use</h3>
+                <p>
+                  Baobabble provides cultural and linguistic learning material for personal educational enrichment. All curricula, tonal exercises, and cultural insights are designed in partnership with native linguistic standards.
+                </p>
+              </div>
+            )}
+
+          </main>
+
+          {/* INTERACTIVE QUIZ MODAL */}
+          {activeQuiz && (
+            <div className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4">
+              <div className="bg-[#111827] border border-slate-700 max-w-md w-full rounded-3xl overflow-hidden shadow-2xl animate-in fade-in zoom-in-95 duration-200">
+                
+                {/* Modal Header */}
+                <div className="bg-slate-800/80 px-5 py-3 flex items-center justify-between border-b border-slate-700">
+                  <div className="flex items-center gap-2">
+                    <span className="text-xs font-bold text-brand-400">Lesson Quiz</span>
+                    <span className="text-xs text-slate-400">• {activeQuiz.title}</span>
+                  </div>
+                  <button
+                    onClick={() => setActiveQuiz(null)}
+                    className="text-slate-400 hover:text-white text-lg font-bold"
+                  >
+                    ✕
+                  </button>
+                </div>
+
+                <div className="p-5">
+                  {!quizCompleted ? (
+                    <div>
+                      {/* Question Progress bar */}
+                      <div className="w-full bg-slate-800 h-2 rounded-full overflow-hidden mb-4">
+                        <div 
+                          className="bg-brand-500 h-full transition-all duration-300"
+                          style={{ width: `${((currentQuestionIndex + 1) / activeQuiz.questions.length) * 100}%` }}
+                        ></div>
+                      </div>
+
+                      <span className="text-[11px] font-bold text-slate-400 uppercase tracking-wider">
+                        Question {currentQuestionIndex + 1} of {activeQuiz.questions.length}
+                      </span>
+                      
+                      <h3 className="text-base font-bold text-white mt-1 mb-4">
+                        {activeQuiz.questions[currentQuestionIndex].prompt}
+                      </h3>
+
+                      {/* Options */}
+                      <div className="space-y-2 mb-5">
+                        {activeQuiz.questions[currentQuestionIndex].options.map((option, idx) => {
+                          const isSelected = selectedOption === idx;
+                          let btnStyle = 'bg-slate-800/80 border-slate-700 text-slate-200 hover:border-slate-500';
+
+                          if (isAnswerSubmitted) {
+                            if (idx === activeQuiz.questions[currentQuestionIndex].correctIndex) {
+                              btnStyle = 'bg-emerald-500/20 border-emerald-500 text-brand-300 font-bold';
+                            } else if (isSelected) {
+                              btnStyle = 'bg-rose-500/20 border-rose-500 text-rose-300 font-bold';
+                            }
+                          } else if (isSelected) {
+                            btnStyle = 'bg-brand-500/20 border-brand-500 text-brand-300 font-bold';
+                          }
+
+                          return (
+                            <button
+                              key={idx}
+                              onClick={() => handleOptionSelect(idx)}
+                              disabled={isAnswerSubmitted}
+                              className={`w-full p-3.5 rounded-xl border text-xs sm:text-sm text-left transition-all flex items-center justify-between ${btnStyle}`}
+                            >
+                              <span>{option}</span>
+                              {isAnswerSubmitted && idx === activeQuiz.questions[currentQuestionIndex].correctIndex && (
+                                <span className="text-emerald-400 font-bold">✓</span>
+                              )}
+                              {isAnswerSubmitted && isSelected && idx !== activeQuiz.questions[currentQuestionIndex].correctIndex && (
+                                <span className="text-rose-400 font-bold">✕</span>
+                              )}
+                            </button>
+                          );
+                        })}
+                      </div>
+
+                      {/* Feedback Explanation */}
+                      {isAnswerSubmitted && (
+                        <div className={`p-3.5 rounded-xl text-xs mb-4 border ${
+                          isAnswerCorrect
+                            ? 'bg-emerald-950/40 border-emerald-500/50 text-emerald-200'
+                            : 'bg-rose-950/40 border-rose-500/50 text-rose-200'
+                        }`}>
+                          <p className="font-bold mb-1">
+                            {isAnswerCorrect ? '🎉 Correct!' : '❌ Not quite right'}
+                          </p>
+                          <p>{activeQuiz.questions[currentQuestionIndex].explanation}</p>
+                        </div>
+                      )}
+
+                      {/* Action buttons */}
+                      <div className="flex gap-2">
+                        {!isAnswerSubmitted ? (
+                          <button
+                            onClick={submitAnswer}
+                            disabled={selectedOption === null}
+                            className="w-full py-3 rounded-xl bg-brand-500 hover:bg-brand-400 disabled:opacity-50 text-slate-950 font-bold text-xs sm:text-sm transition-all"
+                          >
+                            Check Answer
+                          </button>
+                        ) : (
+                          <button
+                            onClick={nextQuestion}
+                            className="w-full py-3 rounded-xl bg-brand-500 hover:bg-brand-400 text-slate-950 font-bold text-xs sm:text-sm transition-all"
+                          >
+                            {currentQuestionIndex + 1 < activeQuiz.questions.length ? 'Next Question →' : 'Complete Lesson! 🏆'}
+                          </button>
+                        )}
+                      </div>
+                    </div>
+                  ) : (
+                    /* Lesson Completed Screen */
+                    <div className="text-center py-6 space-y-4">
+                      <div className="w-20 h-20 rounded-full bg-brand-500/20 text-brand-400 border border-brand-500/40 flex items-center justify-center text-4xl mx-auto shadow-xl shadow-brand-500/20">
+                        🎉
+                      </div>
+                      <h3 className="text-xl font-black text-white">Lesson Completed!</h3>
+                      <p className="text-xs text-slate-300">
+                        You gained <span className="text-amber-400 font-bold">+15 XP</span> and strengthened your African language fluency!
+                      </p>
+                      <button
+                        onClick={() => setActiveQuiz(null)}
+                        className="w-full py-3 rounded-xl bg-brand-500 hover:bg-brand-400 text-slate-950 font-bold text-sm transition-all"
+                      >
+                        Continue to Dashboard
+                      </button>
+                    </div>
+                  )}
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* Universal Footer with all 11 Required Links */}
+          <footer className="border-t border-cardBorder bg-[#0c1220] py-8 px-4 text-xs text-slate-400 mt-12">
+            <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
+              
+              <div className="flex items-center gap-3">
+                <span className="text-2xl">🌳</span>
+                <div>
+                  <span className="text-sm font-bold text-white">Baobabble</span>
+                  <p className="text-[11px] text-slate-500">Master 7 African Languages with Native AI Tutors.</p>
+                </div>
+              </div>
+
+              {/* 11 Pages Links for Crawlers and Users */}
+              <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-2 text-xs">
+                <button onClick={() => navigateTo('app')} className="hover:text-brand-400 transition-colors">Home</button>
+                <button onClick={() => navigateTo('learn_seo', 'yoruba')} className="hover:text-brand-400 transition-colors">Yoruba</button>
+                <button onClick={() => navigateTo('learn_seo', 'igbo')} className="hover:text-brand-400 transition-colors">Igbo</button>
+                <button onClick={() => navigateTo('learn_seo', 'hausa')} className="hover:text-brand-400 transition-colors">Hausa</button>
+                <button onClick={() => navigateTo('learn_seo', 'amharic')} className="hover:text-brand-400 transition-colors">Amharic</button>
+                <button onClick={() => navigateTo('learn_seo', 'swahili')} className="hover:text-brand-400 transition-colors">Swahili</button>
+                <button onClick={() => navigateTo('learn_seo', 'zulu')} className="hover:text-brand-400 transition-colors">isiZulu</button>
+                <button onClick={() => navigateTo('learn_seo', 'lingala')} className="hover:text-brand-400 transition-colors">Lingala</button>
+                <button onClick={() => navigateTo('privacy')} className="hover:text-brand-400 transition-colors">Privacy</button>
+                <button onClick={() => navigateTo('terms')} className="hover:text-brand-400 transition-colors">Terms</button>
+                <button onClick={() => navigateTo('faq')} className="hover:text-brand-400 transition-colors">FAQ</button>
+              </div>
+
+              <div className="text-[11px] text-slate-500">
+                © {new Date().getFullYear()} Baobabble. All rights reserved.
+              </div>
+            </div>
+          </footer>
+
+        </div>
+      );
+    }
+
+    ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+  </script>
+</body>
+</html>

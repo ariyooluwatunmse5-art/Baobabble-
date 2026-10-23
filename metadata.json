@@ -1,0 +1,6 @@
+{
+  "name": "Baobabble",
+  "description": "Master African languages (Yoruba, Swahili, Igbo, Hausa, Twi, Amharic, isiZulu) with interactive lessons, Gemini AI tutor, spaced review, realistic dialogues, and Duolingo-style progression.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
