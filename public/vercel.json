@@ -1,0 +1,36 @@
+{
+  "cleanUrls": false,
+  "trailingSlash": false,
+  "rewrites": [
+    { "source": "/sitemap.xml", "destination": "/sitemap.xml" },
+    { "source": "/robots.txt", "destination": "/robots.txt" },
+    { "source": "/manifest.json", "destination": "/manifest.json" },
+    { "source": "/og-image.png", "destination": "/og-image.png" },
+    { "source": "/icon-512.png", "destination": "/icon-512.png" },
+    { "source": "/about", "destination": "/about.html" },
+    { "source": "/contact", "destination": "/contact.html" },
+    { "source": "/privacy", "destination": "/privacy.html" },
+    { "source": "/terms", "destination": "/terms.html" },
+    { "source": "/learn-yoruba", "destination": "/learn-yoruba.html" },
+    { "source": "/learn-igbo", "destination": "/learn-igbo.html" },
+    { "source": "/learn-hausa", "destination": "/learn-hausa.html" },
+    { "source": "/learn-swahili", "destination": "/learn-swahili.html" },
+    { "source": "/learn-twi", "destination": "/learn-twi.html" },
+    { "source": "/learn-zulu", "destination": "/learn-zulu.html" },
+    { "source": "/african-language-pronunciation", "destination": "/african-language-pronunciation.html" },
+    { "source": "/yoruba-for-beginners", "destination": "/yoruba-for-beginners.html" },
+    { "source": "/igbo-for-beginners", "destination": "/igbo-for-beginners.html" },
+    { "source": "/hausa-for-beginners", "destination": "/hausa-for-beginners.html" },
+    { "source": "/african-language-learning", "destination": "/african-language-learning.html" }
+  ],
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        { "key": "X-Content-Type-Options", "value": "nosniff" },
+        { "key": "X-Frame-Options", "value": "SAMEORIGIN" },
+        { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" }
+      ]
+    }
+  ]
+}
