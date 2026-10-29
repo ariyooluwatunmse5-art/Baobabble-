@@ -169,44 +169,98 @@
 
   <div id="root">
   <!-- Semantic crawlable index for search engines & initial render -->
-  <header style="background:#0F2E25;color:#FAF7F2;padding:1.5rem;text-align:center;">
-    <div style="font-size:1.8rem;font-weight:900;">🌳 Baobabble</div>
-    <h1 style="font-size:1.5rem;margin:0.5rem 0;color:#E5A93C;">African Language AI Tutor</h1>
-    <p style="max-width:700px;margin:0 auto;color:#A0BCB2;font-size:0.95rem;">
-      Learn African languages with interactive lessons, pronunciation practice, AI tutoring, conversations, review and personalized learning. Master Yoruba, Igbo, Hausa, Swahili, Twi, and Zulu.
+  <header style="background:#0F2E25;color:#FAF7F2;padding:2.5rem 1rem 2rem;text-align:center;">
+    <div style="font-size:1.8rem;font-weight:900;margin-bottom:0.5rem;">🌳 Baobabble</div>
+    <div style="display:inline-block;background:rgba(34,197,94,0.15);border:1px solid rgba(34,197,94,0.3);color:#4ade80;font-size:0.8rem;font-weight:700;padding:0.25rem 0.85rem;border-radius:9999px;margin-bottom:0.85rem;">
+      ✨ No sign-up required to start
+    </div>
+    <h1 style="font-size:2.2rem;font-weight:900;margin:0.5rem 0;color:#FFFFFF;line-height:1.2;">
+      Learn an African Language 🌍
+    </h1>
+    <p style="font-size:1.3rem;font-weight:800;color:#34D399;margin:0.5rem auto 1rem;max-width:700px;">
+      Start your first 5-minute lesson today.
     </p>
+    <p style="max-width:700px;margin:0 auto 1.75rem;color:#A0BCB2;font-size:0.95rem;line-height:1.5;">
+      Learn real African languages through interactive lessons, pronunciation practice, conversations, and AI tutoring.
+    </p>
+    <div style="margin:1.5rem 0;">
+      <a href="#languages-grid" style="display:inline-block;background:#10B981;color:#000000;font-weight:900;font-size:1.05rem;padding:0.9rem 2rem;border-radius:1rem;text-decoration:none;box-shadow:0 10px 15px -3px rgba(16,185,129,0.35);">
+        🚀 Start My First Lesson
+      </a>
+    </div>
   </header>
-  <main style="max-width:900px;margin:2rem auto;padding:0 1rem;font-family:sans-serif;">
-    <h2 style="font-size:1.3rem;margin-bottom:1rem;color:#1D2D27;">Available African Language Courses & Curricula:</h2>
-    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1rem;margin-bottom:2rem;">
-      <div style="border:1px solid #E8E2D5;border-radius:12px;padding:1rem;background:#FFF;">
-        <h3 style="margin-top:0;"><a href="learn-yoruba.html" style="color:#1B4D3E;text-decoration:none;font-weight:bold;">🇳🇬 Learn Yoruba (Èdè Yorùbá)</a></h3>
-        <p style="font-size:0.85rem;color:#5A6D65;">Master 3-tone acoustic contours (Mí-Re-Dò), polite honorifics (Ẹ), and conversation.</p>
-        <a href="yoruba-for-beginners.html" style="font-size:0.8rem;color:#C85A32;">Yoruba for Beginners &rarr;</a>
+
+  <main id="languages-grid" style="max-width:960px;margin:2rem auto;padding:0 1rem;font-family:sans-serif;">
+    <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:0.5rem;margin-bottom:1.5rem;">
+      <div>
+        <h2 style="font-size:1.4rem;color:#1D2D27;margin:0 0 0.25rem;">Available African Languages</h2>
+        <p style="font-size:0.85rem;color:#5A6D65;margin:0;">Choose your language to start your first 5-minute lesson</p>
       </div>
-      <div style="border:1px solid #E8E2D5;border-radius:12px;padding:1rem;background:#FFF;">
-        <h3 style="margin-top:0;"><a href="learn-igbo.html" style="color:#1B4D3E;text-decoration:none;font-weight:bold;">🇳🇬 Learn Igbo (Asụsụ Igbo)</a></h3>
-        <p style="font-size:0.85rem;color:#5A6D65;">Dotted vowel harmony (ị, ọ, ụ), Kola nut hospitality courtesies, and everyday dialogue.</p>
-        <a href="igbo-for-beginners.html" style="font-size:0.8rem;color:#C85A32;">Igbo for Beginners &rarr;</a>
+      <a href="learn-yoruba.html" style="font-size:0.85rem;color:#10B981;font-weight:700;text-decoration:none;">Already learning? Continue &rarr;</a>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.25rem;margin-bottom:2rem;">
+      <div style="border:2px solid #10B981;border-radius:16px;padding:1.25rem;background:#FFF;box-shadow:0 4px 6px -1px rgba(0,0,0,0.05);display:flex;flex-direction:column;justify-content:space-between;">
+        <div>
+          <div style="font-size:1.6rem;margin-bottom:0.25rem;">🇳🇬</div>
+          <h3 style="margin:0.25rem 0;font-size:1.2rem;"><a href="learn-yoruba.html" style="color:#0F2E25;text-decoration:none;font-weight:900;">Yorùbá (Èdè Yorùbá)</a></h3>
+          <span style="display:inline-block;background:#E6F4EA;color:#137333;font-size:0.75rem;font-weight:700;padding:0.2rem 0.5rem;border-radius:6px;margin-bottom:0.5rem;">45M+ speakers • Tonal Solfège</span>
+          <p style="font-size:0.85rem;color:#5A6D65;line-height:1.4;">Master 3-tone acoustic contours (Mí-Re-Dò), polite honorifics (Ẹ), and conversation.</p>
+        </div>
+        <a href="yoruba-for-beginners.html" style="display:block;text-align:center;background:#10B981;color:#000;font-weight:900;font-size:0.85rem;padding:0.7rem 1rem;border-radius:10px;text-decoration:none;margin-top:0.85rem;">Start Learning &rarr;</a>
       </div>
-      <div style="border:1px solid #E8E2D5;border-radius:12px;padding:1rem;background:#FFF;">
-        <h3 style="margin-top:0;"><a href="learn-hausa.html" style="color:#1B4D3E;text-decoration:none;font-weight:bold;">🇳🇬 🇳🇪 Learn Hausa (Harshen Hausa)</a></h3>
-        <p style="font-size:0.85rem;color:#5A6D65;">Hooked consonants (Ƙ, Ɓ, Ɗ), trans-Saharan market commerce, and northern courtesies.</p>
-        <a href="hausa-for-beginners.html" style="font-size:0.8rem;color:#C85A32;">Hausa for Beginners &rarr;</a>
+
+      <div style="border:1px solid #E8E2D5;border-radius:16px;padding:1.25rem;background:#FFF;box-shadow:0 4px 6px -1px rgba(0,0,0,0.05);display:flex;flex-direction:column;justify-content:space-between;">
+        <div>
+          <div style="font-size:1.6rem;margin-bottom:0.25rem;">🇳🇬</div>
+          <h3 style="margin:0.25rem 0;font-size:1.2rem;"><a href="learn-igbo.html" style="color:#0F2E25;text-decoration:none;font-weight:900;">Igbo (Asụsụ Igbo)</a></h3>
+          <span style="display:inline-block;background:#E8F0FE;color:#1967D2;font-size:0.75rem;font-weight:700;padding:0.2rem 0.5rem;border-radius:6px;margin-bottom:0.5rem;">30M+ speakers • Vowel Harmony</span>
+          <p style="font-size:0.85rem;color:#5A6D65;line-height:1.4;">Dotted vowel harmony (ị, ọ, ụ), Kola nut hospitality courtesies, and everyday dialogue.</p>
+        </div>
+        <a href="igbo-for-beginners.html" style="display:block;text-align:center;background:#0F2E25;color:#FFF;font-weight:900;font-size:0.85rem;padding:0.7rem 1rem;border-radius:10px;text-decoration:none;margin-top:0.85rem;">Start Learning &rarr;</a>
       </div>
-      <div style="border:1px solid #E8E2D5;border-radius:12px;padding:1rem;background:#FFF;">
-        <h3 style="margin-top:0;"><a href="learn-swahili.html" style="color:#1B4D3E;text-decoration:none;font-weight:bold;">🇰🇪 🇹🇿 Learn Swahili (Kiswahili)</a></h3>
-        <p style="font-size:0.85rem;color:#5A6D65;">East African lingua franca with 200M+ speakers. Noun classes, Matatu phrases, non-tonal grammar.</p>
+
+      <div style="border:1px solid #E8E2D5;border-radius:16px;padding:1.25rem;background:#FFF;box-shadow:0 4px 6px -1px rgba(0,0,0,0.05);display:flex;flex-direction:column;justify-content:space-between;">
+        <div>
+          <div style="font-size:1.6rem;margin-bottom:0.25rem;">🇳🇬 🇳🇪</div>
+          <h3 style="margin:0.25rem 0;font-size:1.2rem;"><a href="learn-hausa.html" style="color:#0F2E25;text-decoration:none;font-weight:900;">Hausa (Harshen Hausa)</a></h3>
+          <span style="display:inline-block;background:#FEF7E0;color:#B06000;font-size:0.75rem;font-weight:700;padding:0.2rem 0.5rem;border-radius:6px;margin-bottom:0.5rem;">75M+ speakers • Trade Lingua Franca</span>
+          <p style="font-size:0.85rem;color:#5A6D65;line-height:1.4;">Hooked consonants (Ƙ, Ɓ, Ɗ), trans-Saharan market commerce, and northern courtesies.</p>
+        </div>
+        <a href="hausa-for-beginners.html" style="display:block;text-align:center;background:#0F2E25;color:#FFF;font-weight:900;font-size:0.85rem;padding:0.7rem 1rem;border-radius:10px;text-decoration:none;margin-top:0.85rem;">Start Learning &rarr;</a>
       </div>
-      <div style="border:1px solid #E8E2D5;border-radius:12px;padding:1rem;background:#FFF;">
-        <h3 style="margin-top:0;"><a href="learn-twi.html" style="color:#1B4D3E;text-decoration:none;font-weight:bold;">🇬🇭 Learn Twi (Asante Twi)</a></h3>
-        <p style="font-size:0.85rem;color:#5A6D65;">Ghanaian Akan soul day names (Kwame, Akosua), royal Asante courtesies (Akwaaba), and proverbs.</p>
+
+      <div style="border:1px solid #E8E2D5;border-radius:16px;padding:1.25rem;background:#FFF;box-shadow:0 4px 6px -1px rgba(0,0,0,0.05);display:flex;flex-direction:column;justify-content:space-between;">
+        <div>
+          <div style="font-size:1.6rem;margin-bottom:0.25rem;">🇬🇭</div>
+          <h3 style="margin:0.25rem 0;font-size:1.2rem;"><a href="learn-twi.html" style="color:#0F2E25;text-decoration:none;font-weight:900;">Twi/Akan (Asante Twi)</a></h3>
+          <span style="display:inline-block;background:#FCE8E6;color:#C5221F;font-size:0.75rem;font-weight:700;padding:0.2rem 0.5rem;border-radius:6px;margin-bottom:0.5rem;">18M+ speakers • Akan Heritage</span>
+          <p style="font-size:0.85rem;color:#5A6D65;line-height:1.4;">Ghanaian Akan soul day names (Kwame, Akosua), royal Asante courtesies (Akwaaba), and proverbs.</p>
+        </div>
+        <a href="learn-twi.html" style="display:block;text-align:center;background:#0F2E25;color:#FFF;font-weight:900;font-size:0.85rem;padding:0.7rem 1rem;border-radius:10px;text-decoration:none;margin-top:0.85rem;">Start Learning &rarr;</a>
       </div>
-      <div style="border:1px solid #E8E2D5;border-radius:12px;padding:1rem;background:#FFF;">
-        <h3 style="margin-top:0;"><a href="learn-zulu.html" style="color:#1B4D3E;text-decoration:none;font-weight:bold;">🇿🇦 Learn Zulu (isiZulu)</a></h3>
-        <p style="font-size:0.85rem;color:#5A6D65;">Three click consonants (c, q, x), poetic warrior heritage, and Ubuntu philosophy (Sawubona).</p>
+
+      <div style="border:1px solid #E8E2D5;border-radius:16px;padding:1.25rem;background:#FFF;box-shadow:0 4px 6px -1px rgba(0,0,0,0.05);display:flex;flex-direction:column;justify-content:space-between;">
+        <div>
+          <div style="font-size:1.6rem;margin-bottom:0.25rem;">🇰🇪 🇹🇿</div>
+          <h3 style="margin:0.25rem 0;font-size:1.2rem;"><a href="learn-swahili.html" style="color:#0F2E25;text-decoration:none;font-weight:900;">Swahili (Kiswahili)</a></h3>
+          <span style="display:inline-block;background:#F3E8FD;color:#7627BB;font-size:0.75rem;font-weight:700;padding:0.2rem 0.5rem;border-radius:6px;margin-bottom:0.5rem;">100M+ speakers • Pan-African</span>
+          <p style="font-size:0.85rem;color:#5A6D65;line-height:1.4;">East African lingua franca with 100M+ speakers. Noun classes, Matatu phrases, non-tonal grammar.</p>
+        </div>
+        <a href="learn-swahili.html" style="display:block;text-align:center;background:#0F2E25;color:#FFF;font-weight:900;font-size:0.85rem;padding:0.7rem 1rem;border-radius:10px;text-decoration:none;margin-top:0.85rem;">Start Learning &rarr;</a>
+      </div>
+
+      <div style="border:1px solid #E8E2D5;border-radius:16px;padding:1.25rem;background:#FFF;box-shadow:0 4px 6px -1px rgba(0,0,0,0.05);display:flex;flex-direction:column;justify-content:space-between;">
+        <div>
+          <div style="font-size:1.6rem;margin-bottom:0.25rem;">🇿🇦</div>
+          <h3 style="margin:0.25rem 0;font-size:1.2rem;"><a href="learn-zulu.html" style="color:#0F2E25;text-decoration:none;font-weight:900;">Zulu (isiZulu)</a></h3>
+          <span style="display:inline-block;background:#FCE8E6;color:#A50E0E;font-size:0.75rem;font-weight:700;padding:0.2rem 0.5rem;border-radius:6px;margin-bottom:0.5rem;">27M+ speakers • Clicks (C, Q, X)</span>
+          <p style="font-size:0.85rem;color:#5A6D65;line-height:1.4;">Three click consonants (c, q, x), poetic warrior heritage, and Ubuntu philosophy (Sawubona).</p>
+        </div>
+        <a href="learn-zulu.html" style="display:block;text-align:center;background:#0F2E25;color:#FFF;font-weight:900;font-size:0.85rem;padding:0.7rem 1rem;border-radius:10px;text-decoration:none;margin-top:0.85rem;">Start Learning &rarr;</a>
       </div>
     </div>
+
     <div style="border-top:1px solid #E8E2D5;padding-top:1.5rem;font-size:0.9rem;display:flex;gap:1.5rem;flex-wrap:wrap;">
       <a href="african-language-pronunciation.html" style="color:#1B4D3E;font-weight:600;">Acoustic Pronunciation Guide</a>
       <a href="african-language-learning.html" style="color:#1B4D3E;font-weight:600;">African Language Families</a>
@@ -15349,7 +15403,7 @@
 
     // --- LESSON RUNNER MODAL (FULL EXERCISE LIFECYCLE) ---
     function LessonRunnerModal({ 
-      unit, currentLang, onClose, onFinishLesson, 
+      unit, currentLang, onClose, onFinishLesson, onNavigateTab, onContinueNextUnit,
       hearts, setHearts, setXp, setStreak, speak 
     }) {
       const [currentQIndex, setCurrentQIndex] = useState(0);
@@ -15606,36 +15660,106 @@
                 )}
               </div>
             ) : (
-              /* Lesson Completion Screen */
-              <div className="bg-gradient-to-b from-gray-900 to-gray-950 border border-emerald-500/40 p-8 rounded-3xl text-center shadow-2xl">
-                <div className="w-20 h-20 bg-emerald-500/20 text-emerald-400 rounded-full flex items-center justify-center text-4xl mx-auto mb-4 animate-bounce">
+              /* Lesson Completion Screen with 5 Clear Paths (Requirement 8) */
+              <div className="bg-gradient-to-b from-gray-900 to-gray-950 border border-emerald-500/40 p-6 sm:p-8 rounded-3xl text-center shadow-2xl max-w-lg mx-auto">
+                <div className="w-16 h-16 bg-emerald-500/20 text-emerald-400 rounded-full flex items-center justify-center text-3xl mx-auto mb-3 animate-bounce">
                   🎉
                 </div>
                 <h2 id="lesson-modal-title" className="text-2xl font-black text-white mb-1">Lesson Mastered!</h2>
-                <p className="text-xs text-gray-400 mb-6">{unit.title} is now completed.</p>
-
-                <div className="grid grid-cols-3 gap-3 mb-6">
+                <p className="text-xs text-gray-400 mb-4">{unit.title} completed successfully.</p>
+                
+                {/* Track XP & Streak stats */}
+                <div className="grid grid-cols-3 gap-2.5 mb-4">
                   <div className="bg-gray-900 p-3 rounded-2xl border border-gray-800">
-                    <span className="block text-amber-400 font-black text-xl">+20</span>
+                    <span className="block text-amber-400 font-black text-lg">+20</span>
                     <span className="text-[10px] text-gray-400 uppercase">XP Earned</span>
                   </div>
                   <div className="bg-gray-900 p-3 rounded-2xl border border-gray-800">
-                    <span className="block text-emerald-400 font-black text-xl">100%</span>
-                    <span className="text-[10px] text-gray-400 uppercase">Fluency Path</span>
+                    <span className="block text-emerald-400 font-black text-lg">100%</span>
+                    <span className="text-[10px] text-gray-400 uppercase">Accuracy</span>
                   </div>
                   <div className="bg-gray-900 p-3 rounded-2xl border border-gray-800">
-                    <span className="block text-orange-400 font-black text-xl">🔥 +1</span>
+                    <span className="block text-orange-400 font-black text-lg">🔥 +1</span>
                     <span className="text-[10px] text-gray-400 uppercase">Streak Up</span>
                   </div>
                 </div>
 
-                <button
-                  type="button"
-                  onClick={onClose}
-                  className="w-full bg-emerald-500 hover:bg-emerald-400 text-black font-black py-3.5 rounded-xl text-sm transition shadow-lg shadow-emerald-500/20"
-                >
-                  Return to Learning Path
-                </button>
+                {/* XP Progress & Daily Streak Status */}
+                <div className="bg-gray-950 border border-gray-800 rounded-2xl p-3.5 mb-5 text-left">
+                  <div className="flex items-center justify-between text-xs font-bold mb-1.5">
+                    <span className="text-gray-300">Daily Goal Progress</span>
+                    <span className="text-amber-400">20 / 50 XP</span>
+                  </div>
+                  <div className="bg-gray-800 h-2 rounded-full overflow-hidden mb-2">
+                    <div className="bg-amber-400 h-full rounded-full transition-all duration-300" style={{ width: '40%' }}></div>
+                  </div>
+                  <div className="flex items-center justify-between text-[11px] text-gray-400">
+                    <span className="text-orange-400 font-bold">🔥 1-Day Streak Active</span>
+                    <span className="text-emerald-400 font-semibold">Practice tomorrow to reach Day 2!</span>
+                  </div>
+                </div>
+
+                {/* 5 Clear Paths (Requirement 8) */}
+                <div className="space-y-2.5 text-left">
+                  <p className="text-[11px] font-black uppercase tracking-wider text-gray-400 mb-1 text-center">Where would you like to go next?</p>
+                  
+                  {/* Path 1: Continue Lesson */}
+                  <button
+                    type="button"
+                    onClick={() => {
+                      if (onContinueNextUnit) onContinueNextUnit();
+                      else onClose();
+                    }}
+                    className="w-full bg-emerald-500 hover:bg-emerald-400 text-black font-black py-3.5 px-4 rounded-2xl text-xs sm:text-sm transition shadow-lg shadow-emerald-500/20 flex items-center justify-between touch-target"
+                  >
+                    <div className="flex items-center space-x-2">
+                      <i className="fa-solid fa-play text-xs"></i>
+                      <span>Continue Lesson (Next Unit)</span>
+                    </div>
+                    <i className="fa-solid fa-arrow-right text-xs"></i>
+                  </button>
+
+                  {/* Path 2: Practice Pronunciation */}
+                  <button
+                    type="button"
+                    onClick={() => {
+                      if (onNavigateTab) onNavigateTab('voice_test');
+                      else onClose();
+                    }}
+                    className="w-full bg-gray-900 hover:bg-gray-800 text-emerald-400 font-bold py-3 px-4 rounded-2xl text-xs border border-emerald-500/30 transition flex items-center justify-between touch-target"
+                  >
+                    <div className="flex items-center space-x-2">
+                      <i className="fa-solid fa-microphone-lines text-xs"></i>
+                      <span>Practice Pronunciation & Tone Accuracy</span>
+                    </div>
+                    <i className="fa-solid fa-arrow-right text-xs"></i>
+                  </button>
+
+                  {/* Path 3: AI Tutor */}
+                  <button
+                    type="button"
+                    onClick={() => {
+                      if (onNavigateTab) onNavigateTab('tutor');
+                      else onClose();
+                    }}
+                    className="w-full bg-gray-900 hover:bg-gray-800 text-indigo-300 font-bold py-3 px-4 rounded-2xl text-xs border border-indigo-500/30 transition flex items-center justify-between touch-target"
+                  >
+                    <div className="flex items-center space-x-2">
+                      <i className="fa-solid fa-robot text-xs"></i>
+                      <span>Chat with African Language AI Tutor</span>
+                    </div>
+                    <i className="fa-solid fa-arrow-right text-xs"></i>
+                  </button>
+
+                  {/* Return to Dashboard */}
+                  <button
+                    type="button"
+                    onClick={onClose}
+                    className="w-full text-center text-gray-400 hover:text-white font-semibold py-2.5 text-xs transition"
+                  >
+                    Go to Learning Dashboard &rarr;
+                  </button>
+                </div>
               </div>
             )}
           </div>
@@ -15668,6 +15792,345 @@
     }
 
 
+    // --- FIRST-TIME WELCOME & ONBOARDING VIEW ---
+    function WelcomeOnboardingView({ 
+      onStartLesson, 
+      onContinueReturningUser, 
+      initialLangId = 'yoruba' 
+    }) {
+      const [selectedLangId, setSelectedLangId] = useState(initialLangId);
+      const [showLevelModal, setShowLevelModal] = useState(false);
+
+      const ONBOARDING_LANGUAGES = [
+        {
+          id: 'yoruba',
+          name: 'Yorùbá',
+          nativeName: 'Èdè Yorùbá',
+          flag: '🇳🇬',
+          country: 'Nigeria & Benin',
+          speakers: '45M+ speakers',
+          badge: 'Tonal Solfège (Mí-Re-Dò)',
+          tagline: 'Master 3-tone acoustic contours, respectful honorifics (Ẹ), and vibrant everyday speech.',
+          greeting: 'Ẹ ń lẹ́ o! (Hello!)',
+          selectedBorder: 'border-emerald-500 bg-emerald-950/20 shadow-emerald-500/20'
+        },
+        {
+          id: 'igbo',
+          name: 'Igbo',
+          nativeName: 'Asụsụ Igbo',
+          flag: '🇳🇬',
+          country: 'Southeastern Nigeria',
+          speakers: '30M+ speakers',
+          badge: 'Vowel Harmony (ị, ọ, ụ)',
+          tagline: 'Discover melodic vowel harmony, Kola nut hospitality courtesies, and everyday dialogue.',
+          greeting: 'Kedụ? (How are you?)',
+          selectedBorder: 'border-blue-500 bg-blue-950/20 shadow-blue-500/20'
+        },
+        {
+          id: 'hausa',
+          name: 'Hausa',
+          nativeName: 'Harshen Hausa',
+          flag: '🇳🇬 🇳🇪',
+          country: 'West & Central Africa',
+          speakers: '75M+ speakers',
+          badge: 'Trade Lingua Franca',
+          tagline: 'Learn hooked consonants (ƙ, ɓ, ɗ), trans-Saharan market commerce, and northern courtesies.',
+          greeting: 'Sannu da zuwa! (Welcome!)',
+          selectedBorder: 'border-amber-500 bg-amber-950/20 shadow-amber-500/20'
+        },
+        {
+          id: 'twi',
+          name: 'Twi/Akan',
+          nativeName: 'Asante Twi',
+          flag: '🇬🇭',
+          country: 'Ghana & West Africa',
+          speakers: '18M+ speakers',
+          badge: 'Akan Soul Heritage',
+          tagline: 'Explore soul day names (Kwame, Akosua), warm Akan hospitality (Akwaaba), and rich proverbs.',
+          greeting: 'Akwaaba! (Welcome!)',
+          selectedBorder: 'border-rose-500 bg-rose-950/20 shadow-rose-500/20'
+        },
+        {
+          id: 'swahili',
+          name: 'Swahili',
+          nativeName: 'Kiswahili',
+          flag: '🇰🇪 🇹🇿',
+          country: 'East & Central Africa',
+          speakers: '100M+ speakers',
+          badge: 'Pan-African AU Official',
+          tagline: 'East Africa’s official lingua franca with logical non-tonal grammar and musical rhythm.',
+          greeting: 'Habari za asubuhi! (Good morning!)',
+          selectedBorder: 'border-purple-500 bg-purple-950/20 shadow-purple-500/20'
+        },
+        {
+          id: 'zulu',
+          name: 'Zulu',
+          nativeName: 'isiZulu',
+          flag: '🇿🇦',
+          country: 'South Africa & Southern Africa',
+          speakers: '27M+ speakers',
+          badge: 'Click Consonants (C, Q, X)',
+          tagline: 'Poetic Nguni heritage with authentic click consonants, warrior poetry, and Ubuntu philosophy.',
+          greeting: 'Sawubona! (Hello / I see you)',
+          selectedBorder: 'border-red-500 bg-red-950/20 shadow-red-500/20'
+        }
+      ];
+
+      const activeLang = ONBOARDING_LANGUAGES.find(l => l.id === selectedLangId) || ONBOARDING_LANGUAGES[0];
+
+      const handleSelectLangAndOpenModal = (langId) => {
+        setSelectedLangId(langId);
+        setShowLevelModal(true);
+      };
+
+      const handleBeginLesson = () => {
+        setShowLevelModal(false);
+        onStartLesson(selectedLangId);
+      };
+
+      return (
+        <div className="min-h-screen bg-gray-950 text-white font-sans antialiased selection:bg-emerald-500 selection:text-white pb-20">
+          {/* Top Welcome Header */}
+          <header className="sticky top-0 z-40 bg-gray-950/95 backdrop-blur-md border-b border-gray-850 px-4 sm:px-8 py-3.5 flex items-center justify-between">
+            <div className="flex items-center space-x-2">
+              <span className="text-2xl">🌳</span>
+              <span className="font-black text-lg tracking-tight text-white">Baobabble</span>
+            </div>
+            {/* Returning user bypass (Requirement 12) */}
+            <button
+              type="button"
+              onClick={onContinueReturningUser}
+              className="text-xs sm:text-sm font-bold text-emerald-400 hover:text-emerald-300 bg-emerald-500/10 hover:bg-emerald-500/20 border border-emerald-500/30 px-3.5 py-2 rounded-xl transition touch-target flex items-center space-x-1"
+            >
+              <span>Already learning? Continue</span>
+              <i className="fa-solid fa-arrow-right text-xs ml-1"></i>
+            </button>
+          </header>
+
+          <main className="max-w-5xl mx-auto px-4 sm:px-6 pt-8 sm:pt-12">
+            {/* 1. Welcoming Hero Section (Requirements 1 & 2) */}
+            <section className="text-center max-w-3xl mx-auto mb-10 sm:mb-14">
+              <div className="inline-flex items-center space-x-2 bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs font-bold px-3.5 py-1.5 rounded-full mb-4">
+                <span>✨ No account required to start</span>
+              </div>
+              <h1 className="text-3xl sm:text-5xl lg:text-6xl font-black text-white tracking-tight leading-tight mb-4">
+                Learn an African Language 🌍
+              </h1>
+              <p className="text-lg sm:text-2xl font-black text-emerald-400 mb-4">
+                Start your first 5-minute lesson today.
+              </p>
+              <p className="text-sm sm:text-base text-gray-300 max-w-2xl mx-auto leading-relaxed mb-8">
+                Learn real African languages through interactive lessons, pronunciation practice, conversations, and AI tutoring.
+              </p>
+
+              {/* 5. Very Prominent Primary CTA (Requirement 5) */}
+              <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
+                <button
+                  type="button"
+                  onClick={() => setShowLevelModal(true)}
+                  className="w-full sm:w-auto px-8 py-4 bg-emerald-500 hover:bg-emerald-400 text-black font-black text-base sm:text-lg rounded-2xl shadow-xl shadow-emerald-500/30 transition transform active:scale-95 flex items-center justify-center space-x-3 touch-target"
+                >
+                  <span className="text-xl">🚀</span>
+                  <span>Start My First Lesson</span>
+                </button>
+              </div>
+
+              {/* Quick Micro Flow steps (Requirement 6) */}
+              <div className="grid grid-cols-3 gap-2 max-w-md mx-auto mt-8 text-center text-[11px] font-bold text-gray-400">
+                <div className="bg-gray-900 border border-gray-800 rounded-xl p-2 text-emerald-400">
+                  <span>1. Pick Language</span>
+                </div>
+                <div className="bg-gray-900 border border-gray-800 rounded-xl p-2 text-emerald-400">
+                  <span>2. Confirm Beginner</span>
+                </div>
+                <div className="bg-gray-900 border border-gray-800 rounded-xl p-2 text-emerald-400">
+                  <span>3. 5-Min Lesson</span>
+                </div>
+              </div>
+            </section>
+
+            {/* 3 & 4. Available Languages Prominently (Requirements 3 & 4) */}
+            <section className="mb-14">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-6">
+                <div>
+                  <h2 className="text-xl sm:text-2xl font-black text-white tracking-tight">
+                    Choose Your African Language
+                  </h2>
+                  <p className="text-xs sm:text-sm text-gray-400">
+                    6 authentic indigenous language curricula curated by native speakers
+                  </p>
+                </div>
+                <span className="text-xs font-bold text-emerald-400 self-start sm:self-auto bg-emerald-950/40 border border-emerald-500/30 px-3 py-1 rounded-full">
+                  Selected: {activeLang.flag} {activeLang.name}
+                </span>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                {ONBOARDING_LANGUAGES.map((lang) => {
+                  const isSelected = lang.id === selectedLangId;
+                  return (
+                    <div
+                      key={lang.id}
+                      onClick={() => setSelectedLangId(lang.id)}
+                      className={`relative rounded-3xl p-5 border-2 transition-all cursor-pointer flex flex-col justify-between touch-target ${
+                        isSelected
+                          ? `${lang.selectedBorder} border-emerald-500 shadow-lg`
+                          : 'bg-gray-900/80 border-gray-800 hover:border-gray-700 hover:bg-gray-900'
+                      }`}
+                    >
+                      <div>
+                        {/* Header */}
+                        <div className="flex items-center justify-between mb-3">
+                          <div className="flex items-center space-x-2">
+                            <span className="text-2xl">{lang.flag}</span>
+                            <div>
+                              <h3 className="text-base sm:text-lg font-black text-white">
+                                {lang.name}
+                              </h3>
+                              <span className="text-[11px] font-semibold text-gray-400">
+                                {lang.nativeName}
+                              </span>
+                            </div>
+                          </div>
+                          {isSelected && (
+                            <span className="w-6 h-6 rounded-full bg-emerald-500 text-black flex items-center justify-center text-xs font-bold">
+                              ✓
+                            </span>
+                          )}
+                        </div>
+
+                        {/* Badge & Speakers */}
+                        <div className="flex items-center space-x-2 mb-2 flex-wrap gap-y-1">
+                          <span className="bg-gray-800 text-emerald-300 text-[10px] font-bold px-2.5 py-0.5 rounded-full border border-gray-700">
+                            {lang.badge}
+                          </span>
+                          <span className="text-[10px] text-gray-400 font-medium">
+                            {lang.speakers}
+                          </span>
+                        </div>
+
+                        {/* Short Description */}
+                        <p className="text-xs text-gray-300 leading-relaxed mb-4">
+                          {lang.tagline}
+                        </p>
+                      </div>
+
+                      <div>
+                        {/* Preview phrase */}
+                        <div className="bg-gray-950/60 rounded-xl px-3 py-2 mb-3 border border-gray-800/80">
+                          <span className="text-[10px] text-gray-500 block">Lesson 1 Preview:</span>
+                          <span className="text-xs font-bold text-amber-300">{lang.greeting}</span>
+                        </div>
+
+                        {/* Start Learning Action Button (Requirement 4) */}
+                        <button
+                          type="button"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            handleSelectLangAndOpenModal(lang.id);
+                          }}
+                          className={`w-full py-3 rounded-2xl font-black text-xs transition shadow-md touch-target flex items-center justify-center space-x-2 ${
+                            isSelected
+                              ? 'bg-emerald-500 hover:bg-emerald-400 text-black shadow-emerald-500/20'
+                              : 'bg-gray-800 hover:bg-gray-750 text-white'
+                          }`}
+                        >
+                          <span>Start Learning {lang.name}</span>
+                          <i className="fa-solid fa-play text-[10px]"></i>
+                        </button>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            </section>
+
+            {/* Bottom Card for Mobile & Fast Start */}
+            <div className="bg-gradient-to-r from-gray-900 via-gray-900 to-gray-950 border border-gray-800 rounded-3xl p-5 shadow-2xl flex flex-col sm:flex-row items-center justify-between gap-4">
+              <div className="flex items-center space-x-3 text-center sm:text-left">
+                <span className="text-3xl">{activeLang.flag}</span>
+                <div>
+                  <div className="text-xs text-gray-400">Ready to start?</div>
+                  <div className="text-base font-black text-white">
+                    {activeLang.name} ({activeLang.nativeName}) • Unit 1 Foundations
+                  </div>
+                </div>
+              </div>
+              <button
+                type="button"
+                onClick={() => setShowLevelModal(true)}
+                className="w-full sm:w-auto px-8 py-3.5 bg-emerald-500 hover:bg-emerald-400 text-black font-black text-sm rounded-2xl transition shadow-lg shadow-emerald-500/20 touch-target"
+              >
+                🚀 Start My First Lesson Now
+              </button>
+            </div>
+          </main>
+
+          {/* 6. Level Confirmation Modal (Requirement 6) */}
+          {showLevelModal && (
+            <div className="fixed inset-0 z-50 bg-black/85 backdrop-blur-sm flex items-center justify-center p-4" role="dialog" aria-modal="true">
+              <div className="bg-gray-900 border border-emerald-500/40 rounded-3xl max-w-md w-full p-6 text-center shadow-2xl animate-fadeIn">
+                <div className="w-16 h-16 bg-emerald-500/20 rounded-full flex items-center justify-center text-3xl mx-auto mb-3">
+                  {activeLang.flag}
+                </div>
+                <h3 className="text-xl font-black text-white mb-1">
+                  Learn {activeLang.name}
+                </h3>
+                <p className="text-xs text-emerald-400 font-bold mb-4">
+                  {activeLang.nativeName} • {activeLang.badge}
+                </p>
+
+                {/* Level Card */}
+                <div className="bg-gray-950 border border-gray-800 rounded-2xl p-4 text-left mb-6">
+                  <div className="flex items-center justify-between mb-2">
+                    <span className="text-xs font-black text-emerald-400 uppercase tracking-wider">
+                      Recommended Level
+                    </span>
+                    <span className="bg-emerald-500 text-black text-[10px] font-black px-2 py-0.5 rounded-full">
+                      A1 Beginner
+                    </span>
+                  </div>
+                  <h4 className="text-sm font-black text-white mb-1">
+                    Lesson 1: Foundations & Essential Greetings
+                  </h4>
+                  <p className="text-xs text-gray-400 leading-relaxed mb-3">
+                    Start speaking immediately. Master everyday greetings, tonal rhythm, and cultural courtesies.
+                  </p>
+                  <div className="grid grid-cols-3 gap-2 text-[10px] font-semibold text-gray-300 text-center">
+                    <div className="bg-gray-900 p-2 rounded-xl border border-gray-800">
+                      ⚡ 5 Minutes
+                    </div>
+                    <div className="bg-gray-900 p-2 rounded-xl border border-gray-800">
+                      🎯 7 Exercises
+                    </div>
+                    <div className="bg-gray-900 p-2 rounded-xl border border-gray-800">
+                      🔥 +20 XP
+                    </div>
+                  </div>
+                </div>
+
+                {/* Action Buttons */}
+                <button
+                  type="button"
+                  onClick={handleBeginLesson}
+                  className="w-full bg-emerald-500 hover:bg-emerald-400 text-black font-black py-4 rounded-2xl text-base shadow-xl shadow-emerald-500/25 transition transform active:scale-95 touch-target mb-3"
+                >
+                  ▶ Begin Lesson 1 Now
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setShowLevelModal(false)}
+                  className="w-full text-gray-400 hover:text-white font-bold py-2 text-xs transition"
+                >
+                  ← Choose a different language
+                </button>
+              </div>
+            </div>
+          )}
+        </div>
+      );
+    }
+
     // --- MAIN APP COMPONENT ---
     function App() {
       // Preferences & Languages
@@ -15676,10 +16139,14 @@
       const [lowDataMode, setLowDataMode] = useState(() => localStorage.getItem('baobab_low_data') === 'true');
       const [elevenLabsApiKey, setElevenLabsApiKey] = useState(() => localStorage.getItem('baobab_elevenlabs_key') || '');
 
-      // Gamification State
-      const [xp, setXp] = useState(() => parseInt(localStorage.getItem('baobab_xp') || '140', 10));
+      // First-Time Visitor Onboarding State
+      const [isOnboarded, setIsOnboarded] = useState(() => localStorage.getItem('baobab_onboarded') === 'true');
+      const [showWelcomeView, setShowWelcomeView] = useState(() => localStorage.getItem('baobab_onboarded') !== 'true');
+
+      // Gamification State (Persisted)
+      const [xp, setXp] = useState(() => parseInt(localStorage.getItem('baobab_xp') || (localStorage.getItem('baobab_onboarded') === 'true' ? '140' : '0'), 10));
       const [hearts, setHearts] = useState(() => parseInt(localStorage.getItem('baobab_hearts') || '4', 10));
-      const [streak, setStreak] = useState(() => parseInt(localStorage.getItem('baobab_streak') || '7', 10));
+      const [streak, setStreak] = useState(() => parseInt(localStorage.getItem('baobab_streak') || (localStorage.getItem('baobab_onboarded') === 'true' ? '7' : '0'), 10));
 
       // Navigation & Views
       // activeTab: 'learn', 'review', 'tutor', 'dialogue', 'profile'
@@ -15761,6 +16228,73 @@
               setCurrentView('app');
             }}
           />
+        );
+      }
+
+      // First-Time Visitor Welcome Screen (Requirements 1-7)
+      if (showWelcomeView) {
+        return (
+          <>
+            <WelcomeOnboardingView
+              initialLangId={currentLanguageId}
+              onStartLesson={(langId) => {
+                setCurrentLanguageId(langId);
+                localStorage.setItem('baobab_lang', langId);
+                const targetLang = LANGUAGES[langId] || LANGUAGES['yoruba'];
+                if (targetLang && targetLang.units && targetLang.units[0]) {
+                  setActiveUnitLesson(targetLang.units[0]);
+                }
+              }}
+              onContinueReturningUser={() => {
+                setIsOnboarded(true);
+                setShowWelcomeView(false);
+                localStorage.setItem('baobab_onboarded', 'true');
+              }}
+            />
+            {/* Active Quiz / Lesson Runner Modal launched from Onboarding */}
+            {activeUnitLesson && (
+              <LessonRunnerModal
+                unit={activeUnitLesson}
+                currentLang={LANGUAGES[currentLanguageId] || LANGUAGES['yoruba']}
+                onClose={() => {
+                  setActiveUnitLesson(null);
+                  setIsOnboarded(true);
+                  setShowWelcomeView(false);
+                  localStorage.setItem('baobab_onboarded', 'true');
+                }}
+                onFinishLesson={(unitId) => {
+                  setActiveUnitLesson(null);
+                  setIsOnboarded(true);
+                  setShowWelcomeView(false);
+                  localStorage.setItem('baobab_onboarded', 'true');
+                  setStreak(prev => Math.max(1, prev + 1));
+                }}
+                onNavigateTab={(tab) => {
+                  setActiveUnitLesson(null);
+                  setIsOnboarded(true);
+                  setShowWelcomeView(false);
+                  localStorage.setItem('baobab_onboarded', 'true');
+                  setActiveTab(tab);
+                }}
+                onContinueNextUnit={() => {
+                  setIsOnboarded(true);
+                  setShowWelcomeView(false);
+                  localStorage.setItem('baobab_onboarded', 'true');
+                  const targetLang = LANGUAGES[currentLanguageId] || LANGUAGES['yoruba'];
+                  if (targetLang && targetLang.units && targetLang.units[1]) {
+                    setActiveUnitLesson(targetLang.units[1]);
+                  } else {
+                    setActiveUnitLesson(null);
+                  }
+                }}
+                hearts={hearts}
+                setHearts={setHearts}
+                setXp={setXp}
+                setStreak={setStreak}
+                speak={speakNative}
+              />
+            )}
+          </>
         );
       }
 
@@ -15852,21 +16386,31 @@
               
               {/* TOP STATUS BAR (Mobile & Desktop) */}
               <header className="sticky top-0 z-30 bg-gray-950/95 backdrop-blur-md border-b border-gray-850 px-4 py-3 flex items-center justify-between">
-                {/* Language selector dropdown */}
-                <div className="relative">
-                  <select
-                    value={currentLanguageId}
-                    onChange={e => setCurrentLanguageId(e.target.value)}
-                    className="bg-gray-900 border border-gray-800 text-white font-extrabold text-xs rounded-xl px-3 py-1.5 focus:outline-none focus:border-emerald-500 cursor-pointer appearance-none pr-7 shadow-sm touch-target"
-                    aria-label="Select Learning Language"
+                {/* Language selector dropdown & Explore button */}
+                <div className="flex items-center space-x-2">
+                  <div className="relative">
+                    <select
+                      value={currentLanguageId}
+                      onChange={e => setCurrentLanguageId(e.target.value)}
+                      className="bg-gray-900 border border-gray-800 text-white font-extrabold text-xs rounded-xl px-3 py-1.5 focus:outline-none focus:border-emerald-500 cursor-pointer appearance-none pr-7 shadow-sm touch-target"
+                      aria-label="Select Learning Language"
+                    >
+                      {Object.values(LANGUAGES).map(lang => (
+                        <option key={lang.id} value={lang.id}>
+                          {lang.name} ({lang.nativeName})
+                        </option>
+                      ))}
+                    </select>
+                    <i className="fa-solid fa-chevron-down absolute right-2.5 top-1/2 -translate-y-1/2 text-[10px] text-gray-400 pointer-events-none"></i>
+                  </div>
+                  <button
+                    type="button"
+                    onClick={() => setShowWelcomeView(true)}
+                    className="hidden sm:inline-flex items-center space-x-1 text-[11px] font-bold text-gray-400 hover:text-emerald-400 bg-gray-900 border border-gray-800 px-2.5 py-1.5 rounded-xl transition touch-target"
+                    title="Explore All African Languages"
                   >
-                    {Object.values(LANGUAGES).map(lang => (
-                      <option key={lang.id} value={lang.id}>
-                        {lang.name} ({lang.nativeName})
-                      </option>
-                    ))}
-                  </select>
-                  <i className="fa-solid fa-chevron-down absolute right-2.5 top-1/2 -translate-y-1/2 text-[10px] text-gray-400 pointer-events-none"></i>
+                    <span>🌍 All Languages</span>
+                  </button>
                 </div>
 
                 {/* Gamification Stats: Streak, XP, Hearts */}
@@ -16233,7 +16777,18 @@
               onClose={() => setActiveUnitLesson(null)}
               onFinishLesson={(unitId) => {
                 setActiveUnitLesson(null);
-                setStreak(prev => prev + 1);
+                setStreak(prev => Math.max(1, prev + 1));
+              }}
+              onNavigateTab={(tab) => {
+                setActiveUnitLesson(null);
+                setActiveTab(tab);
+              }}
+              onContinueNextUnit={() => {
+                if (currentLang.units[1]) {
+                  setActiveUnitLesson(currentLang.units[1]);
+                } else {
+                  setActiveUnitLesson(null);
+                }
               }}
               hearts={hearts}
               setHearts={setHearts}
